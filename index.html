@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystery Game</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="phone">
+
+        <!-- LOCK SCREEN -->
+        <div class="screen lock-screen" id="lockScreen">
+
+            <div class="status-bar">
+                <span>TM</span>
+                <span>▮▮▮ WiFi 🔋</span>
+            </div>
+
+            <div class="lock-content">
+
+                <p class="weather">Sun ☀ 78°</p>
+
+                <h1 class="time">2:43</h1>
+
+                <p class="day">SUNDAY</p>
+
+                <p class="date">February 2, 2025</p>
+
+            </div>
+
+            <div class="bottom-buttons">
+
+                <button class="round-button">🔦</button>
+
+                <button class="round-button">📷</button>
+
+            </div>
+
+            <p class="swipe-text">
+                Tap to unlock
+            </p>
+
+        </div>
+
+
+        <!-- PASSCODE SCREEN -->
+        <div class="screen passcode-screen hidden" id="passcodeScreen">
+
+            <div class="status-bar">
+                <span>TM</span>
+                <span>▮▮▮ WiFi 🔋</span>
+            </div>
+
+            <div class="passcode-content">
+
+                <div class="lock-icon">🔒</div>
+
+                <h2>Enter Passcode</h2>
+
+                <div class="passcode-dots">
+
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+
+                </div>
+
+
+                <div class="keypad">
+
+                    <button class="number" data-number="1">1</button>
+                    <button class="number" data-number="2">2</button>
+                    <button class="number" data-number="3">3</button>
+
+                    <button class="number" data-number="4">4</button>
+                    <button class="number" data-number="5">5</button>
+                    <button class="number" data-number="6">6</button>
+
+                    <button class="number" data-number="7">7</button>
+                    <button class="number" data-number="8">8</button>
+                    <button class="number" data-number="9">9</button>
+
+                    <div></div>
+
+                    <button class="number" data-number="0">0</button>
+
+                    <button id="deleteButton">
+                        ⌫
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TEMPORARY HOME SCREEN -->
+        <!-- HOME SCREEN -->
+<div class="screen home-screen hidden" id="homeScreen">
+
+    <div class="home-pages" id="homePages">
+
+        <!-- PAGE 1 -->
+        <div class="home-page">
+
+            <div class="app">
+                <div class="app-icon">💬</div>
+                <p>Messages</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">📷</div>
+                <p>Photos</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">📝</div>
+                <p>Notes</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">✉️</div>
+                <p>Mail</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">🌐</div>
+                <p>Browser</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">📁</div>
+                <p>Files</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">📞</div>
+                <p>Phone</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">⚙️</div>
+                <p>Settings</p>
+            </div>
+
+        </div>
+
+
+        <!-- PAGE 2 -->
+        <div class="home-page">
+
+            <div class="app">
+                <div class="app-icon">🔎</div>
+                <p>Evidence</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">🗺️</div>
+                <p>Maps</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">🎵</div>
+                <p>Music</p>
+            </div>
+
+            <div class="app">
+                <div class="app-icon">🧮</div>
+                <p>Calculator</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PAGE DOTS -->
+    <div class="page-dots">
+
+        <span class="page-dot active-dot"></span>
+        <span class="page-dot"></span>
+
+    </div>
+
+
+    <!-- TEMPORARY LOCK BUTTON -->
+    <button id="lockButton">Lock Phone</button>
+
+</div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,466 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #202020;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* THE PHONE */
+
+.phone {
+    width: 390px;
+    height: 780px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 42px;
+
+    background-color: black;
+}
+
+
+/* EVERY PHONE SCREEN */
+
+.screen {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+}
+
+
+/* HIDE SCREENS */
+
+.hidden {
+    display: none;
+}
+
+
+/* LOCK SCREEN */
+
+.lock-screen {
+    background-image: url("images/lockscreen.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+ 
+}
+
+
+/* STATUS BAR */
+
+.status-bar {
+    height: 40px;
+
+    padding: 12px 18px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 12px;
+}
+
+
+/* MAIN LOCK INFORMATION */
+
+.lock-content {
+    text-align: center;
+
+    margin-top: 40px;
+}
+
+.weather {
+    margin: 0;
+
+    font-size: 18px;
+}
+
+.time {
+    margin: 5px 0;
+
+    font-size: 82px;
+
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+.day {
+    margin-top: 15px;
+    margin-bottom: 2px;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+}
+
+.date {
+    margin: 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 13px;
+}
+
+
+/* FLASHLIGHT + CAMERA */
+
+.bottom-buttons {
+    position: absolute;
+
+    bottom: 45px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0 45px;
+}
+
+.round-button {
+    width: 44px;
+    height: 44px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: rgba(100, 110, 105, 0.35);
+
+    font-size: 18px;
+}
+
+
+/* TAP TO OPEN */
+
+.swipe-text {
+    position: absolute;
+
+    bottom: 10px;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+/* PASSCODE SCREEN */
+
+.passcode-screen {
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 70% 25%,
+            rgba(207, 174, 127, 0.7),
+            transparent 35%
+        ),
+        linear-gradient(
+            160deg,
+            #655044,
+            #8b705b 45%,
+            #985237 100%
+        );
+}
+
+
+/* PASSCODE CONTENT */
+
+.passcode-content {
+    text-align: center;
+
+    padding-top: 30px;
+}
+
+
+/* LOCK ICON */
+
+.lock-icon {
+    font-size: 22px;
+
+    margin-top: 10px;
+    margin-bottom: 55px;
+}
+
+
+/* ENTER PASSCODE TEXT */
+
+.passcode-content h2 {
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* PASSCODE DOTS */
+
+.passcode-dots {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 17px;
+
+    margin-top: 10px;
+    margin-bottom: 58px;
+}
+
+
+.dot {
+    width: 9px;
+    height: 9px;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 50%;
+}
+
+
+.dot.filled {
+    background-color: white;
+}
+
+
+/* NUMBER GRID */
+
+.keypad {
+    width: 240px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    justify-items: center;
+
+    column-gap: 17px;
+    row-gap: 15px;
+}
+
+
+/* NUMBER BUTTONS */
+
+.number {
+    width: 64px;
+    height: 64px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.20);
+
+    color: white;
+
+    font-size: 27px;
+
+    font-weight: 300;
+
+    cursor: pointer;
+
+    transition: background-color 0.1s;
+}
+
+
+/* BUTTON PRESSED EFFECT */
+
+.number:active {
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* DELETE BUTTON */
+
+#deleteButton {
+    width: 64px;
+    height: 64px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+
+/* HOME SCREEN */
+
+.home-screen {
+    background-image: url("images/homewallpaper.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+    overflow: hidden;
+}
+
+
+/* CONTAINER HOLDING ALL HOME PAGES */
+
+.home-pages {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    overflow-x: auto;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+}
+
+
+.home-pages::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* EACH HOME PAGE */
+
+.home-page {
+    min-width: 100%;
+    height: 100%;
+
+    scroll-snap-align: start;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    align-content: start;
+
+    gap: 25px 15px;
+
+    padding: 70px 20px 120px;
+}
+
+
+/* APP */
+
+.app {
+    text-align: center;
+}
+
+
+.app-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: auto;
+
+    border-radius: 15px;
+
+    background-color: rgba(255,255,255,0.8);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 28px;
+}
+
+
+.app p {
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: white;
+}
+
+
+/* PAGE DOTS */
+
+.page-dots {
+    position: absolute;
+
+    bottom: 75px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 7px;
+}
+
+
+.page-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background-color: rgba(255,255,255,0.45);
+}
+
+
+.active-dot {
+    background-color: white;
+}
+
+
+/* TEMP LOCK BUTTON */
+
+#lockButton {
+    position: absolute;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border: none;
+
+    padding: 8px 15px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+}
+
+/* Hide the coded lock-screen elements
+   because they already exist in the Figma image */
+
+.lock-screen .status-bar,
+.lock-screen .lock-content,
+.lock-screen .bottom-buttons,
+.lock-screen .swipe-text {
+    display: none;
+}
