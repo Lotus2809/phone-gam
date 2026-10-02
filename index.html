@@ -14,10 +14,7 @@
 
 <div class="phone">
 
-    <!-- =========================
-         LOCK SCREEN
-    ========================== -->
-
+    <!-- LOCK SCREEN -->
     <div class="screen lock-screen" id="lockScreen">
 
         <div class="status-bar">
@@ -27,13 +24,13 @@
 
         <div class="lock-content">
 
-            <p class="weather">Thu ☀ 78°</p>
+            <p class="weather">Sun ☀ 78°</p>
 
-            <h1 class="time">7:12</h1>
+            <h1 class="time">2:43</h1>
 
-            <p class="day">THURSDAY</p>
+            <p class="day">SUNDAY</p>
 
-            <p class="date">September 24, 2026</p>
+            <p class="date">February 2, 2025</p>
 
         </div>
 
@@ -52,10 +49,7 @@
     </div>
 
 
-    <!-- =========================
-         PASSCODE SCREEN
-    ========================== -->
-
+    <!-- PASSCODE SCREEN -->
     <div class="screen passcode-screen hidden" id="passcodeScreen">
 
         <div class="status-bar">
@@ -80,7 +74,6 @@
 
             </div>
 
-
             <div class="keypad">
 
                 <button class="number" data-number="1">1</button>
@@ -99,9 +92,7 @@
 
                 <button class="number" data-number="0">0</button>
 
-                <button id="deleteButton">
-                    ⌫
-                </button>
+                <button id="deleteButton">⌫</button>
 
             </div>
 
@@ -110,76 +101,25 @@
     </div>
 
 
-    <!-- =========================
-         HOME SCREEN
-    ========================== -->
-
+    <!-- HOME SCREEN -->
     <div class="screen home-screen hidden" id="homeScreen">
 
-        <div class="status-bar">
-            <span>7:12</span>
+        <div class="status-bar home-status">
+            <span>TM</span>
             <span>▮▮▮ WiFi 🔋</span>
         </div>
 
-        <p class="home-date">
-            THURSDAY · SEPTEMBER 24
-        </p>
+        <div class="apps">
 
+            <button class="app" id="messagesApp">
 
-        <div class="app-grid">
-
-            <button class="app-button" id="openMessagesButton">
-
-                <div class="app-icon messages-app">
+                <div class="app-icon messages-icon">
                     💬
                 </div>
 
-                <span class="notification-badge" id="messageBadge">
-                    1
-                </span>
+                <span class="badge" id="messageBadge">1</span>
 
-                <span class="app-name">
-                    Messages
-                </span>
-
-            </button>
-
-
-            <button class="app-button disabled-app">
-
-                <div class="app-icon">
-                    🖼️
-                </div>
-
-                <span class="app-name">
-                    Gallery
-                </span>
-
-            </button>
-
-
-            <button class="app-button disabled-app">
-
-                <div class="app-icon">
-                    📞
-                </div>
-
-                <span class="app-name">
-                    Calls
-                </span>
-
-            </button>
-
-
-            <button class="app-button disabled-app">
-
-                <div class="app-icon">
-                    📝
-                </div>
-
-                <span class="app-name">
-                    Notes
-                </span>
+                <p>Messages</p>
 
             </button>
 
@@ -188,75 +128,177 @@
     </div>
 
 
-    <!-- =========================
-         MESSAGE LIST
-    ========================== -->
-
+    <!-- MESSAGES LIST -->
     <div class="screen messages-screen hidden" id="messagesScreen">
 
-        <div class="messages-header">
+        <div class="messages-top">
 
-            <button class="back-button" id="messagesBackButton">
+            <button class="nav-back" id="messagesBack">
                 ‹
             </button>
 
             <div>
-
-                <h2>
-                    Messages
-                </h2>
-
-                <p>
-                    Adrien's phone
-                </p>
-
+                <h2>Messages</h2>
+                <p>Adrien's phone</p>
             </div>
 
         </div>
 
 
-        <div class="chat-list" id="chatList"></div>
+        <div class="conversation-list">
+
+            <button class="conversation unread" data-chat="unknown">
+
+                <div class="contact-avatar">?</div>
+
+                <div class="conversation-info">
+
+                    <div class="conversation-title">
+
+                        <strong>Unknown</strong>
+
+                        <span>19:15</span>
+
+                    </div>
+
+                    <p id="unknownPreview">
+                        You still on for the 25th?
+                    </p>
+
+                </div>
+
+            </button>
+
+
+            <button class="conversation" data-chat="emma">
+
+                <div class="contact-avatar">E</div>
+
+                <div class="conversation-info">
+
+                    <div class="conversation-title">
+
+                        <strong>Emma</strong>
+
+                        <span>Sep 16</span>
+
+                    </div>
+
+                    <p>
+                        5 missed calls · 2 video calls
+                    </p>
+
+                </div>
+
+            </button>
+
+
+            <button class="conversation" data-chat="auntie">
+
+                <div class="contact-avatar">A</div>
+
+                <div class="conversation-info">
+
+                    <div class="conversation-title">
+
+                        <strong>Auntie</strong>
+
+                        <span>Sep 15</span>
+
+                    </div>
+
+                    <p>
+                        Adrien where are you?
+                    </p>
+
+                </div>
+
+            </button>
+
+
+            <button class="conversation" data-chat="ced">
+
+                <div class="contact-avatar">C</div>
+
+                <div class="conversation-info">
+
+                    <div class="conversation-title">
+
+                        <strong>CED</strong>
+
+                        <span>Sep 15</span>
+
+                    </div>
+
+                    <p>
+                        Did they do something to you?
+                    </p>
+
+                </div>
+
+            </button>
+
+
+            <button class="conversation" data-chat="timmy">
+
+                <div class="contact-avatar">T</div>
+
+                <div class="conversation-info">
+
+                    <div class="conversation-title">
+
+                        <strong>Timmy</strong>
+
+                        <span>Aug 25</span>
+
+                    </div>
+
+                    <p>
+                        Use the other phone
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
 
     </div>
 
 
-    <!-- =========================
-         OPEN CONVERSATION
-    ========================== -->
+    <!-- CHAT SCREEN -->
+    <div class="screen chat-screen hidden" id="chatScreen">
 
-    <div class="screen thread-screen hidden" id="threadScreen">
+        <div class="chat-top">
 
-        <div class="thread-header">
-
-            <button class="back-button" id="threadBackButton">
+            <button class="nav-back" id="chatBack">
                 ‹
             </button>
 
-            <div class="thread-avatar" id="threadAvatar">
+            <div class="chat-avatar" id="chatAvatar">
                 ?
             </div>
 
-            <div class="thread-info">
+            <div>
 
-                <h3 id="threadName">
+                <h3 id="chatName">
                     Unknown
                 </h3>
 
-                <p id="threadStatus"></p>
+                <p id="chatStatus"></p>
 
             </div>
 
         </div>
 
 
-        <div class="thread-body" id="threadBody"></div>
+        <div class="chat-messages" id="chatMessages"></div>
 
 
-        <!-- ONLY UNKNOWN GETS THIS -->
+        <!-- ONLY USED FOR UNKNOWN -->
+        <div class="unknown-response hidden" id="unknownResponse">
 
-        <div class="reply-area hidden" id="replyArea">
-
-            <button id="unknownReplyButton">
+            <button id="replyUnknown">
                 Who is this?
             </button>
 
@@ -270,5 +312,5 @@
 <script src="script.js"></script>
 
 </body>
-</html>
+
 </html>
