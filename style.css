@@ -2,25 +2,59 @@
     box-sizing: border-box;
 }
 
+
+:root {
+
+    --dark: #0b141a;
+
+    --dark2: #111b21;
+
+    --incoming: #202c33;
+
+    --outgoing: #075e54;
+
+    --text: #eef5f7;
+
+    --muted: #8696a0;
+
+    --accent: #00a884;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
 body {
+
     margin: 0;
 
     min-height: 100vh;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    background-color: #202020;
+    background: #202020;
 
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 
-/* THE PHONE */
+button {
+
+    font-family: inherit;
+
+}
+
 
 .phone {
+
     width: 390px;
+
     height: 780px;
 
     position: relative;
@@ -29,71 +63,102 @@ body {
 
     border-radius: 42px;
 
-    background-color: black;
+    background: black;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+
 }
 
 
-/* EVERY PHONE SCREEN */
-
 .screen {
+
     position: absolute;
 
     width: 100%;
+
     height: 100%;
 
     top: 0;
+
     left: 0;
+
 }
 
-
-/* HIDE SCREENS */
 
 .hidden {
-    display: none;
+
+    display: none !important;
+
 }
 
 
-/* LOCK SCREEN */
 
-.lock-screen {
-    background-image: url("images/lockscreen.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
- 
-}
-
-
-/* STATUS BAR */
+/* =========================
+   STATUS BAR
+========================= */
 
 .status-bar {
+
     height: 40px;
 
     padding: 12px 18px;
 
     display: flex;
+
     justify-content: space-between;
 
     font-size: 12px;
+
 }
 
 
-/* MAIN LOCK INFORMATION */
+
+/* =========================
+   LOCK SCREEN
+========================= */
+
+.lock-screen {
+
+    color: #53605c;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,0.1),
+            rgba(255,255,255,0.1)
+        ),
+
+        url("images/wallpaper.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    cursor: pointer;
+
+}
+
 
 .lock-content {
+
     text-align: center;
 
     margin-top: 40px;
+
 }
 
+
 .weather {
+
     margin: 0;
 
     font-size: 18px;
+
 }
 
+
 .time {
+
     margin: 5px 0;
 
     font-size: 82px;
@@ -101,29 +166,36 @@ body {
     font-weight: 300;
 
     line-height: 1;
+
 }
 
+
 .day {
+
     margin-top: 15px;
+
     margin-bottom: 2px;
 
     font-family: Georgia, serif;
 
     font-size: 18px;
+
 }
 
+
 .date {
+
     margin: 0;
 
     font-family: Georgia, serif;
 
     font-size: 13px;
+
 }
 
 
-/* FLASHLIGHT + CAMERA */
-
 .bottom-buttons {
+
     position: absolute;
 
     bottom: 45px;
@@ -131,28 +203,33 @@ body {
     width: 100%;
 
     display: flex;
+
     justify-content: space-between;
 
     padding: 0 45px;
+
 }
 
+
 .round-button {
+
     width: 44px;
+
     height: 44px;
 
     border: none;
 
     border-radius: 50%;
 
-    background-color: rgba(100, 110, 105, 0.35);
+    background: rgba(100,110,105,0.35);
 
     font-size: 18px;
+
 }
 
 
-/* TAP TO OPEN */
-
 .swipe-text {
+
     position: absolute;
 
     bottom: 10px;
@@ -163,93 +240,97 @@ body {
 
     font-size: 11px;
 
-    cursor: pointer;
 }
 
 
-/* PASSCODE SCREEN */
+
+/* =========================
+   PASSCODE
+========================= */
 
 .passcode-screen {
+
     color: white;
 
     background:
-        radial-gradient(
-            circle at 70% 25%,
-            rgba(207, 174, 127, 0.7),
-            transparent 35%
-        ),
+
         linear-gradient(
-            160deg,
-            #655044,
-            #8b705b 45%,
-            #985237 100%
-        );
+            rgba(70,45,35,0.35),
+            rgba(70,45,35,0.35)
+        ),
+
+        url("images/wallpaper.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
 }
 
-
-/* PASSCODE CONTENT */
 
 .passcode-content {
+
     text-align: center;
 
-    padding-top: 30px;
+    padding-top: 65px;
+
 }
 
-
-/* LOCK ICON */
 
 .lock-icon {
-    font-size: 22px;
 
-    margin-top: 10px;
-    margin-bottom: 55px;
+    font-size: 25px;
+
+    margin-bottom: 50px;
+
 }
 
 
-/* ENTER PASSCODE TEXT */
-
 .passcode-content h2 {
-    margin: 0;
 
     font-size: 14px;
 
-    font-weight: 600;
+    font-weight: normal;
+
 }
 
 
-/* PASSCODE DOTS */
-
 .passcode-dots {
+
     display: flex;
 
     justify-content: center;
 
-    gap: 17px;
+    gap: 18px;
 
-    margin-top: 10px;
-    margin-bottom: 58px;
+    margin: 15px 0 55px;
+
 }
 
 
 .dot {
-    width: 9px;
-    height: 9px;
 
-    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    width: 10px;
+
+    height: 10px;
+
+    border: 1.5px solid white;
 
     border-radius: 50%;
+
 }
 
 
 .dot.filled {
-    background-color: white;
+
+    background: white;
+
 }
 
 
-/* NUMBER GRID */
-
 .keypad {
-    width: 240px;
+
+    width: 250px;
 
     margin: auto;
 
@@ -257,210 +338,801 @@ body {
 
     grid-template-columns: repeat(3, 1fr);
 
-    justify-items: center;
+    gap: 18px 25px;
 
-    column-gap: 17px;
-    row-gap: 15px;
 }
 
 
-/* NUMBER BUTTONS */
+.number,
+#deleteButton {
 
-.number {
-    width: 64px;
-    height: 64px;
+    width: 62px;
+
+    height: 62px;
 
     border: none;
 
     border-radius: 50%;
 
-    background-color: rgba(255, 255, 255, 0.20);
+    background: rgba(255,255,255,0.18);
 
     color: white;
 
-    font-size: 27px;
-
-    font-weight: 300;
+    font-size: 28px;
 
     cursor: pointer;
 
-    transition: background-color 0.1s;
 }
 
-
-/* BUTTON PRESSED EFFECT */
-
-.number:active {
-    background-color: rgba(255, 255, 255, 0.45);
-}
-
-
-/* DELETE BUTTON */
 
 #deleteButton {
-    width: 64px;
-    height: 64px;
-
-    border: none;
 
     background: transparent;
 
-    color: white;
-
     font-size: 18px;
 
-    cursor: pointer;
 }
 
 
 
-/* HOME SCREEN */
+/* =========================
+   HOME SCREEN
+========================= */
 
 .home-screen {
-    background-image: url("images/homewallpaper.png");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
     color: white;
-    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,0.2),
+            rgba(0,0,0,0.35)
+        ),
+
+        url("images/wallpaper.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
 }
 
 
-/* CONTAINER HOLDING ALL HOME PAGES */
+.home-date {
 
-.home-pages {
-    width: 100%;
-    height: 100%;
+    margin:
 
-    display: flex;
+        35px
+        25px
+        10px;
 
-    overflow-x: auto;
+    font-size: 12px;
 
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    letter-spacing: 2px;
 
-    scrollbar-width: none;
+    opacity: 0.8;
+
 }
 
 
-.home-pages::-webkit-scrollbar {
-    display: none;
-}
-
-
-/* EACH HOME PAGE */
-
-.home-page {
-    min-width: 100%;
-    height: 100%;
-
-    scroll-snap-align: start;
+.app-grid {
 
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
 
-    align-content: start;
+    gap: 30px 14px;
 
-    gap: 25px 15px;
+    padding: 25px 20px;
 
-    padding: 70px 20px 120px;
 }
 
 
-/* APP */
+.app-button {
 
-.app {
-    text-align: center;
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 7px;
+
+    border: none;
+
+    background: none;
+
+    color: white;
+
+    cursor: pointer;
+
 }
 
 
 .app-icon {
+
     width: 58px;
+
     height: 58px;
-
-    margin: auto;
-
-    border-radius: 15px;
-
-    background-color: rgba(255,255,255,0.8);
 
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
-    font-size: 28px;
+    border-radius: 17px;
+
+    background: rgba(255,255,255,0.2);
+
+    font-size: 29px;
+
 }
 
 
-.app p {
-    margin-top: 5px;
+.messages-app {
+
+    background: #1aaa91;
+
+}
+
+
+.app-name {
 
     font-size: 11px;
 
-    color: white;
 }
 
 
-/* PAGE DOTS */
+.notification-badge {
 
-.page-dots {
     position: absolute;
 
-    bottom: 75px;
+    top: -6px;
 
-    width: 100%;
+    right: 6px;
+
+    width: 21px;
+
+    height: 21px;
 
     display: flex;
+
+    align-items: center;
+
     justify-content: center;
-
-    gap: 7px;
-}
-
-
-.page-dot {
-    width: 7px;
-    height: 7px;
 
     border-radius: 50%;
 
-    background-color: rgba(255,255,255,0.45);
+    background: #e33c3c;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
 }
 
 
-.active-dot {
-    background-color: white;
+.disabled-app {
+
+    opacity: 0.5;
+
 }
 
 
-/* TEMP LOCK BUTTON */
 
-#lockButton {
-    position: absolute;
+/* =========================
+   MESSAGES
+========================= */
 
-    bottom: 25px;
-    left: 50%;
+.messages-screen,
+.thread-screen {
 
-    transform: translateX(-50%);
+    background: var(--dark);
+
+    color: var(--text);
+
+}
+
+
+.messages-header,
+.thread-header {
+
+    height: 83px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+
+        20px
+        14px
+        10px;
+
+    background: var(--dark2);
+
+    border-bottom:
+
+        1px solid
+        rgba(255,255,255,0.05);
+
+}
+
+
+.messages-header h2 {
+
+    margin: 0;
+
+    font-size: 21px;
+
+}
+
+
+.messages-header p {
+
+    margin:
+
+        3px
+        0
+        0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.back-button {
+
+    width: 38px;
+
+    height: 38px;
+
+    margin-right: 7px;
 
     border: none;
 
-    padding: 8px 15px;
+    background: none;
 
-    border-radius: 15px;
+    color: white;
+
+    font-size: 34px;
 
     cursor: pointer;
+
 }
 
-/* Hide the coded lock-screen elements
-   because they already exist in the Figma image */
 
-.lock-screen .status-bar,
-.lock-screen .lock-content,
-.lock-screen .bottom-buttons,
-.lock-screen .swipe-text {
-    display: none;
+
+/* =========================
+   CHAT LIST
+========================= */
+
+.chat-list {
+
+    height:
+
+        calc(
+            100%
+            - 83px
+        );
+
+    overflow-y: auto;
+
+}
+
+
+.chat-row {
+
+    width: 100%;
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+
+        10px
+        15px;
+
+    border: none;
+
+    border-bottom:
+
+        1px solid
+        rgba(255,255,255,0.05);
+
+    background: var(--dark);
+
+    color: white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+
+.chat-row:hover {
+
+    background: #111d23;
+
+}
+
+
+.avatar,
+.thread-avatar {
+
+    width: 49px;
+
+    height: 49px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #37434a;
+
+    color: #dfe6e8;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+}
+
+
+.chat-main {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.chat-name {
+
+    margin-bottom: 5px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+}
+
+
+.chat-preview {
+
+    overflow: hidden;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.chat-time {
+
+    align-self: flex-start;
+
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.unread-dot {
+
+    display: inline-block;
+
+    width: 8px;
+
+    height: 8px;
+
+    margin-left: 5px;
+
+    border-radius: 50%;
+
+    background: #25d366;
+
+}
+
+
+
+/* =========================
+   THREAD HEADER
+========================= */
+
+.thread-header {
+
+    height: 76px;
+
+}
+
+
+.thread-avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    margin-right: 10px;
+
+    font-size: 16px;
+
+}
+
+
+.thread-info h3 {
+
+    margin: 0;
+
+    font-size: 17px;
+
+}
+
+
+.thread-info p {
+
+    margin:
+
+        3px
+        0
+        0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+
+/* =========================
+   CONVERSATION
+========================= */
+
+.thread-body {
+
+    height:
+
+        calc(
+            100%
+            - 76px
+        );
+
+    overflow-y: auto;
+
+    padding:
+
+        16px
+        10px
+        28px;
+
+    background-color: #0b141a;
+
+    background-image:
+
+        radial-gradient(
+            rgba(255,255,255,0.025)
+            1px,
+            transparent
+            1px
+        );
+
+    background-size: 15px 15px;
+
+}
+
+
+.thread-body.has-reply {
+
+    height:
+
+        calc(
+            100%
+            - 76px
+            - 70px
+        );
+
+}
+
+
+.date-chip,
+.system-chip {
+
+    width: fit-content;
+
+    max-width: 80%;
+
+    margin:
+
+        12px
+        auto;
+
+    padding:
+
+        6px
+        10px;
+
+    border-radius: 7px;
+
+    background: #182229;
+
+    color: #aebac1;
+
+    font-size: 11px;
+
+    text-align: center;
+
+}
+
+
+.system-chip {
+
+    color: #d1b76c;
+
+}
+
+
+.message-row {
+
+    display: flex;
+
+    margin:
+
+        4px
+        0;
+
+}
+
+
+.message-row.outgoing {
+
+    justify-content: flex-end;
+
+}
+
+
+.message-row.incoming {
+
+    justify-content: flex-start;
+
+}
+
+
+.message-bubble {
+
+    max-width: 78%;
+
+    min-width: 70px;
+
+    padding:
+
+        8px
+        9px
+        5px;
+
+    border-radius: 10px;
+
+    background: var(--incoming);
+
+    color: white;
+
+    font-size: 13px;
+
+    line-height: 1.35;
+
+}
+
+
+.outgoing .message-bubble {
+
+    background: var(--outgoing);
+
+}
+
+
+.message-text {
+
+    white-space: pre-line;
+
+}
+
+
+.message-meta {
+
+    margin-top: 4px;
+
+    color: rgba(255,255,255,0.58);
+
+    font-size: 9px;
+
+    text-align: right;
+
+}
+
+
+.call-card {
+
+    min-width: 185px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 5px;
+
+}
+
+
+.call-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    font-size: 20px;
+
+}
+
+
+.call-title {
+
+    font-weight: bold;
+
+}
+
+
+.call-subtitle {
+
+    margin-top: 2px;
+
+    color: #b3bfc5;
+
+    font-size: 11px;
+
+}
+
+
+.media-card {
+
+    min-width: 150px;
+
+    height: 90px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    border-radius: 7px;
+
+    background: rgba(0,0,0,0.2);
+
+}
+
+
+.media-icon {
+
+    font-size: 27px;
+
+}
+
+
+
+/* =========================
+   UNKNOWN REPLY
+========================= */
+
+.reply-area {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 10px;
+
+    background: var(--dark2);
+
+}
+
+
+#unknownReplyButton {
+
+    width: 90%;
+
+    padding: 12px;
+
+    border:
+
+        1px solid
+        var(--accent);
+
+    border-radius: 22px;
+
+    background: #17282b;
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+#unknownReplyButton:hover {
+
+    background: #1d3738;
+
+}
+
+
+
+/* =========================
+   SCROLLBARS
+========================= */
+
+.chat-list::-webkit-scrollbar,
+.thread-body::-webkit-scrollbar {
+
+    width: 4px;
+
+}
+
+
+.chat-list::-webkit-scrollbar-thumb,
+.thread-body::-webkit-scrollbar-thumb {
+
+    background: rgba(255,255,255,0.12);
+
+    border-radius: 10px;
+
+}
 }
