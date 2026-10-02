@@ -1488,6 +1488,7 @@ replyUnknown.addEventListener("click", function () {
 
 
     }, 700);
+});
 
 // OPEN MESSAGES APP FROM HOME SCREEN
 const messagesAppButton = document.getElementById("messagesApp");
@@ -1508,5 +1509,5 @@ if (messagesAppButton && existingMessagesScreen) {
         }
     };
 }
-});   
+  
 
