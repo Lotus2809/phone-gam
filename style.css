@@ -2,59 +2,25 @@
     box-sizing: border-box;
 }
 
-
-:root {
-
-    --dark: #0b141a;
-
-    --dark2: #111b21;
-
-    --incoming: #202c33;
-
-    --outgoing: #075e54;
-
-    --text: #eef5f7;
-
-    --muted: #8696a0;
-
-    --accent: #00a884;
-}
-
-
-/* =========================
-   PAGE
-========================= */
-
 body {
-
     margin: 0;
 
     min-height: 100vh;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
-    background: #202020;
+    background-color: #202020;
 
-    font-family: Arial, Helvetica, sans-serif;
-
+    font-family: Arial, sans-serif;
 }
 
 
-button {
-
-    font-family: inherit;
-
-}
-
+/* PHONE */
 
 .phone {
-
     width: 390px;
-
     height: 780px;
 
     position: relative;
@@ -63,102 +29,80 @@ button {
 
     border-radius: 42px;
 
-    background: black;
-
-    box-shadow: 0 25px 70px rgba(0,0,0,0.5);
-
+    background-color: black;
 }
 
 
-.screen {
+/* EVERY SCREEN */
 
+.screen {
     position: absolute;
 
     width: 100%;
-
     height: 100%;
 
     top: 0;
-
     left: 0;
-
 }
 
 
 .hidden {
-
     display: none !important;
-
 }
 
 
+/* ====================================
+   LOCK SCREEN
+==================================== */
 
-/* =========================
-   STATUS BAR
-========================= */
+.lock-screen {
+    color: #53605c;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.1),
+            rgba(255,255,255,0.1)
+        ),
+        url("images/wallpaper.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    cursor: pointer;
+}
+
+
+/* STATUS BAR */
 
 .status-bar {
-
     height: 40px;
 
     padding: 12px 18px;
 
     display: flex;
-
     justify-content: space-between;
 
     font-size: 12px;
-
 }
 
 
-
-/* =========================
-   LOCK SCREEN
-========================= */
-
-.lock-screen {
-
-    color: #53605c;
-
-    background-image:
-
-        linear-gradient(
-            rgba(255,255,255,0.1),
-            rgba(255,255,255,0.1)
-        ),
-
-        url("images/wallpaper.jpg");
-
-    background-size: cover;
-
-    background-position: center;
-
-    cursor: pointer;
-
-}
-
+/* MAIN LOCK INFORMATION */
 
 .lock-content {
-
     text-align: center;
 
     margin-top: 40px;
-
 }
 
 
 .weather {
-
     margin: 0;
 
     font-size: 18px;
-
 }
 
 
 .time {
-
     margin: 5px 0;
 
     font-size: 82px;
@@ -166,36 +110,31 @@ button {
     font-weight: 300;
 
     line-height: 1;
-
 }
 
 
 .day {
-
     margin-top: 15px;
-
     margin-bottom: 2px;
 
     font-family: Georgia, serif;
 
     font-size: 18px;
-
 }
 
 
 .date {
-
     margin: 0;
 
     font-family: Georgia, serif;
 
     font-size: 13px;
-
 }
 
 
-.bottom-buttons {
+/* FLASHLIGHT + CAMERA */
 
+.bottom-buttons {
     position: absolute;
 
     bottom: 45px;
@@ -203,33 +142,29 @@ button {
     width: 100%;
 
     display: flex;
-
     justify-content: space-between;
 
     padding: 0 45px;
-
 }
 
 
 .round-button {
-
     width: 44px;
-
     height: 44px;
 
     border: none;
 
     border-radius: 50%;
 
-    background: rgba(100,110,105,0.35);
+    background-color: rgba(100, 110, 105, 0.35);
 
     font-size: 18px;
-
 }
 
 
-.swipe-text {
+/* TAP TO OPEN */
 
+.swipe-text {
     position: absolute;
 
     bottom: 10px;
@@ -240,63 +175,53 @@ button {
 
     font-size: 11px;
 
+    cursor: pointer;
 }
 
 
-
-/* =========================
-   PASSCODE
-========================= */
+/* ====================================
+   PASSCODE SCREEN
+==================================== */
 
 .passcode-screen {
-
     color: white;
 
     background:
-
         linear-gradient(
-            rgba(70,45,35,0.35),
-            rgba(70,45,35,0.35)
+            rgba(70, 45, 35, 0.35),
+            rgba(70, 45, 35, 0.35)
         ),
-
         url("images/wallpaper.jpg");
 
     background-size: cover;
-
     background-position: center;
-
 }
 
 
 .passcode-content {
-
     text-align: center;
 
     padding-top: 65px;
-
 }
 
 
 .lock-icon {
-
     font-size: 25px;
 
     margin-bottom: 50px;
-
 }
 
 
 .passcode-content h2 {
-
     font-size: 14px;
 
     font-weight: normal;
-
 }
 
 
-.passcode-dots {
+/* PASSCODE DOTS */
 
+.passcode-dots {
     display: flex;
 
     justify-content: center;
@@ -304,32 +229,27 @@ button {
     gap: 18px;
 
     margin: 15px 0 55px;
-
 }
 
 
 .dot {
-
     width: 10px;
-
     height: 10px;
 
     border: 1.5px solid white;
 
     border-radius: 50%;
-
 }
 
 
 .dot.filled {
-
-    background: white;
-
+    background-color: white;
 }
 
 
-.keypad {
+/* KEYPAD */
 
+.keypad {
     width: 250px;
 
     margin: auto;
@@ -339,7 +259,6 @@ button {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 18px 25px;
-
 }
 
 
@@ -347,99 +266,64 @@ button {
 #deleteButton {
 
     width: 62px;
-
     height: 62px;
 
     border: none;
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,0.18);
+    background-color: rgba(255,255,255,0.18);
 
     color: white;
 
     font-size: 28px;
 
     cursor: pointer;
-
 }
 
 
 #deleteButton {
-
-    background: transparent;
+    background-color: transparent;
 
     font-size: 18px;
-
 }
 
 
-
-/* =========================
+/* ====================================
    HOME SCREEN
-========================= */
+==================================== */
 
 .home-screen {
-
     color: white;
 
-    background:
-
+    background-image:
         linear-gradient(
-            rgba(0,0,0,0.2),
-            rgba(0,0,0,0.35)
+            rgba(0,0,0,0.05),
+            rgba(0,0,0,0.05)
         ),
-
         url("images/wallpaper.jpg");
 
     background-size: cover;
-
     background-position: center;
-
 }
 
 
-.home-date {
-
-    margin:
-
-        35px
-        25px
-        10px;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    opacity: 0.8;
-
+.home-status {
+    color: white;
 }
 
 
-.app-grid {
+.apps {
+    padding: 55px 25px;
 
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
-
-    gap: 30px 14px;
-
-    padding: 25px 20px;
-
 }
 
 
-.app-button {
-
+.app {
     position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 7px;
 
     border: none;
 
@@ -449,191 +333,143 @@ button {
 
     cursor: pointer;
 
+    text-align: center;
 }
 
 
 .app-icon {
-
     width: 58px;
-
     height: 58px;
+
+    margin: auto;
+
+    border-radius: 15px;
 
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
-    border-radius: 17px;
-
-    background: rgba(255,255,255,0.2);
-
-    font-size: 29px;
-
+    font-size: 31px;
 }
 
 
-.messages-app {
-
-    background: #1aaa91;
-
+.messages-icon {
+    background: #24a86b;
 }
 
 
-.app-name {
+.app p {
+    margin-top: 5px;
 
     font-size: 11px;
-
 }
 
 
-.notification-badge {
-
+.badge {
     position: absolute;
 
-    top: -6px;
-
-    right: 6px;
+    top: -7px;
+    right: 4px;
 
     width: 21px;
-
     height: 21px;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
+    align-items: center;
 
     border-radius: 50%;
 
-    background: #e33c3c;
+    background: red;
 
     color: white;
 
     font-size: 11px;
-
-    font-weight: bold;
-
 }
 
 
-.disabled-app {
-
-    opacity: 0.5;
-
-}
-
-
-
-/* =========================
+/* ====================================
    MESSAGES
-========================= */
+==================================== */
 
 .messages-screen,
-.thread-screen {
+.chat-screen {
+    background: #0b141a;
 
-    background: var(--dark);
-
-    color: var(--text);
-
+    color: white;
 }
 
 
-.messages-header,
-.thread-header {
-
-    height: 83px;
+.messages-top,
+.chat-top {
+    height: 80px;
 
     display: flex;
 
     align-items: center;
 
-    padding:
+    padding: 20px 12px 10px;
 
-        20px
-        14px
-        10px;
+    background: #111b21;
 
-    background: var(--dark2);
-
-    border-bottom:
-
-        1px solid
-        rgba(255,255,255,0.05);
-
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 
-.messages-header h2 {
-
+.messages-top h2 {
     margin: 0;
 
-    font-size: 21px;
-
+    font-size: 22px;
 }
 
 
-.messages-header p {
+.messages-top p {
+    margin: 3px 0 0;
 
-    margin:
-
-        3px
-        0
-        0;
-
-    color: var(--muted);
+    color: #8696a0;
 
     font-size: 11px;
-
 }
 
 
-.back-button {
-
-    width: 38px;
-
-    height: 38px;
-
-    margin-right: 7px;
-
+.nav-back {
     border: none;
 
     background: none;
 
     color: white;
 
-    font-size: 34px;
+    font-size: 38px;
+
+    margin-right: 8px;
 
     cursor: pointer;
-
 }
 
 
+/* CONVERSATION LIST */
 
-/* =========================
-   CHAT LIST
-========================= */
-
-.chat-list {
-
-    height:
-
-        calc(
-            100%
-            - 83px
-        );
+.conversation-list {
+    height: calc(100% - 80px);
 
     overflow-y: auto;
-
 }
 
 
-.chat-row {
-
+.conversation {
     width: 100%;
 
     min-height: 76px;
+
+    border: none;
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+
+    background: #0b141a;
+
+    color: white;
 
     display: flex;
 
@@ -641,245 +477,142 @@ button {
 
     gap: 12px;
 
-    padding:
-
-        10px
-        15px;
-
-    border: none;
-
-    border-bottom:
-
-        1px solid
-        rgba(255,255,255,0.05);
-
-    background: var(--dark);
-
-    color: white;
-
-    text-align: left;
+    padding: 10px 15px;
 
     cursor: pointer;
 
+    text-align: left;
 }
 
 
-.chat-row:hover {
-
-    background: #111d23;
-
+.conversation:hover {
+    background: #131f25;
 }
 
 
-.avatar,
-.thread-avatar {
-
-    width: 49px;
-
-    height: 49px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+.contact-avatar,
+.chat-avatar {
+    width: 48px;
+    height: 48px;
 
     border-radius: 50%;
 
-    background: #37434a;
+    background: #364147;
 
-    color: #dfe6e8;
+    display: flex;
 
-    font-size: 19px;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
 
     font-weight: bold;
-
 }
 
 
-.chat-main {
-
+.conversation-info {
     flex: 1;
 
     min-width: 0;
-
 }
 
 
-.chat-name {
+.conversation-title {
+    display: flex;
 
-    margin-bottom: 5px;
+    justify-content: space-between;
 
-    font-size: 16px;
-
-    font-weight: bold;
-
+    align-items: center;
 }
 
 
-.chat-preview {
+.conversation-title span {
+    color: #8696a0;
 
-    overflow: hidden;
+    font-size: 10px;
+}
 
-    color: var(--muted);
+
+.conversation-info p {
+    margin: 5px 0 0;
+
+    color: #8696a0;
 
     font-size: 13px;
+
+    overflow: hidden;
 
     white-space: nowrap;
 
     text-overflow: ellipsis;
-
 }
 
 
-.chat-time {
-
-    align-self: flex-start;
-
-    margin-top: 9px;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
+.unread strong {
+    color: #25d366;
 }
 
 
-.unread-dot {
+/* ====================================
+   CHAT HEADER
+==================================== */
 
-    display: inline-block;
-
-    width: 8px;
-
-    height: 8px;
-
-    margin-left: 5px;
-
-    border-radius: 50%;
-
-    background: #25d366;
-
+.chat-top {
+    height: 75px;
 }
 
 
-
-/* =========================
-   THREAD HEADER
-========================= */
-
-.thread-header {
-
-    height: 76px;
-
-}
-
-
-.thread-avatar {
-
+.chat-avatar {
     width: 42px;
-
     height: 42px;
 
-    margin-right: 10px;
-
-    font-size: 16px;
-
+    margin-right: 9px;
 }
 
 
-.thread-info h3 {
-
+.chat-top h3 {
     margin: 0;
 
     font-size: 17px;
-
 }
 
 
-.thread-info p {
+.chat-top p {
+    margin: 3px 0 0;
 
-    margin:
-
-        3px
-        0
-        0;
-
-    color: var(--muted);
+    color: #8696a0;
 
     font-size: 10px;
-
 }
 
 
+/* ====================================
+   CHAT BODY
+==================================== */
 
-/* =========================
-   CONVERSATION
-========================= */
-
-.thread-body {
-
-    height:
-
-        calc(
-            100%
-            - 76px
-        );
+.chat-messages {
+    height: calc(100% - 75px);
 
     overflow-y: auto;
 
-    padding:
+    padding: 15px 10px 30px;
 
-        16px
-        10px
-        28px;
-
-    background-color: #0b141a;
-
-    background-image:
-
-        radial-gradient(
-            rgba(255,255,255,0.025)
-            1px,
-            transparent
-            1px
-        );
-
-    background-size: 15px 15px;
-
+    background: #0b141a;
 }
 
 
-.thread-body.has-reply {
-
-    height:
-
-        calc(
-            100%
-            - 76px
-            - 70px
-        );
-
+.chat-messages.with-reply {
+    height: calc(100% - 75px - 66px);
 }
 
 
 .date-chip,
 .system-chip {
-
     width: fit-content;
 
-    max-width: 80%;
+    margin: 12px auto;
 
-    margin:
-
-        12px
-        auto;
-
-    padding:
-
-        6px
-        10px;
+    padding: 6px 10px;
 
     border-radius: 7px;
 
@@ -890,249 +623,133 @@ button {
     font-size: 11px;
 
     text-align: center;
-
 }
 
 
 .system-chip {
-
-    color: #d1b76c;
-
+    color: #d7bd76;
 }
 
 
 .message-row {
-
     display: flex;
 
-    margin:
-
-        4px
-        0;
-
-}
-
-
-.message-row.outgoing {
-
-    justify-content: flex-end;
-
+    margin: 4px 0;
 }
 
 
 .message-row.incoming {
-
     justify-content: flex-start;
-
 }
 
 
-.message-bubble {
+.message-row.outgoing {
+    justify-content: flex-end;
+}
 
+
+.message {
     max-width: 78%;
 
-    min-width: 70px;
-
-    padding:
-
-        8px
-        9px
-        5px;
+    padding: 8px 9px 5px;
 
     border-radius: 10px;
 
-    background: var(--incoming);
-
-    color: white;
+    background: #202c33;
 
     font-size: 13px;
 
     line-height: 1.35;
-
 }
 
 
-.outgoing .message-bubble {
-
-    background: var(--outgoing);
-
+.outgoing .message {
+    background: #075e54;
 }
 
 
 .message-text {
-
     white-space: pre-line;
-
 }
 
 
-.message-meta {
-
+.message-time {
     margin-top: 4px;
-
-    color: rgba(255,255,255,0.58);
-
-    font-size: 9px;
 
     text-align: right;
 
+    color: rgba(255,255,255,0.6);
+
+    font-size: 9px;
 }
 
 
-.call-card {
-
-    min-width: 185px;
+.call-box {
+    min-width: 170px;
 
     display: flex;
-
-    align-items: center;
 
     gap: 10px;
 
-    padding: 5px;
-
+    align-items: center;
 }
 
 
-.call-icon {
-
+.call-symbol {
     width: 38px;
-
     height: 38px;
+
+    border-radius: 50%;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
-
-    border-radius: 50%;
 
     background: rgba(255,255,255,0.08);
 
-    font-size: 20px;
-
+    font-size: 19px;
 }
 
 
 .call-title {
-
     font-weight: bold;
-
 }
 
 
-.call-subtitle {
-
-    margin-top: 2px;
-
-    color: #b3bfc5;
+.call-detail {
+    color: #aebac1;
 
     font-size: 11px;
-
 }
 
 
-.media-card {
+/* UNKNOWN RESPONSE */
 
-    min-width: 150px;
-
-    height: 90px;
+.unknown-response {
+    height: 66px;
 
     display: flex;
 
-    flex-direction: column;
-
+    justify-content: center;
     align-items: center;
 
-    justify-content: center;
-
-    gap: 5px;
-
-    border-radius: 7px;
-
-    background: rgba(0,0,0,0.2);
-
+    background: #111b21;
 }
 
 
-.media-icon {
+#replyUnknown {
+    width: 88%;
 
-    font-size: 27px;
+    padding: 11px;
 
-}
+    border: 1px solid #00a884;
 
-
-
-/* =========================
-   UNKNOWN REPLY
-========================= */
-
-.reply-area {
-
-    height: 70px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 10px;
-
-    background: var(--dark2);
-
-}
-
-
-#unknownReplyButton {
-
-    width: 90%;
-
-    padding: 12px;
-
-    border:
-
-        1px solid
-        var(--accent);
-
-    border-radius: 22px;
+    border-radius: 20px;
 
     background: #17282b;
 
     color: white;
 
     cursor: pointer;
-
-}
-
-
-#unknownReplyButton:hover {
-
-    background: #1d3738;
-
-}
-
-
-
-/* =========================
-   SCROLLBARS
-========================= */
-
-.chat-list::-webkit-scrollbar,
-.thread-body::-webkit-scrollbar {
-
-    width: 4px;
-
-}
-
-
-.chat-list::-webkit-scrollbar-thumb,
-.thread-body::-webkit-scrollbar-thumb {
-
-    background: rgba(255,255,255,0.12);
-
-    border-radius: 10px;
-
-}
 }
