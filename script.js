@@ -1489,4 +1489,23 @@ replyUnknown.addEventListener("click", function () {
 
     }, 700);
 
-});
+// OPEN MESSAGES APP FROM HOME SCREEN
+const messagesAppButton = document.getElementById("messagesApp");
+const existingMessagesScreen = document.getElementById("messagesScreen");
+
+if (messagesAppButton && existingMessagesScreen) {
+    messagesAppButton.onclick = function () {
+
+        // Hide home
+        document.getElementById("homeScreen").classList.add("hidden");
+
+        // Show existing Messages list
+        existingMessagesScreen.classList.remove("hidden");
+
+        // Use the chat data/render function that is already in this file
+        if (typeof renderChatList === "function") {
+            renderChatList();
+        }
+    };
+}
+
