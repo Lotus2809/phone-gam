@@ -1508,4 +1508,5 @@ if (messagesAppButton && existingMessagesScreen) {
         }
     };
 }
+});   
 
