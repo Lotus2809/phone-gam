@@ -753,3 +753,128 @@ body {
 
     cursor: pointer;
 }
+
+/* ====================================
+   HOME SCREEN APP GRID
+   ADD THIS AT THE BOTTOM
+==================================== */
+
+.apps {
+    padding: 55px 24px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 28px 14px;
+}
+
+
+.app {
+    position: relative;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+
+.app-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    font-size: 29px;
+}
+
+
+.app p {
+    margin: 6px 0 0;
+
+    font-size: 11px;
+
+    color: white;
+
+    text-align: center;
+}
+
+
+/* INDIVIDUAL APP COLORS */
+
+.messages-icon {
+    background: #25a86b;
+}
+
+.calls-icon {
+    background: #35b95f;
+}
+
+.gallery-icon {
+    background: #eeeeee;
+}
+
+.browser-icon {
+    background: #3b82f6;
+}
+
+.notes-icon {
+    background: #f4c542;
+}
+
+.files-icon {
+    background: #4f8fdc;
+}
+
+.mail-icon {
+    background: #4385d5;
+}
+
+.settings-icon {
+    background: #777777;
+}
+
+
+/* UNREAD MESSAGE BADGE */
+
+.badge {
+    position: absolute;
+
+    top: -7px;
+    right: 3px;
+
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: red;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
