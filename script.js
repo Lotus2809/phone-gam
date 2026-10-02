@@ -1,160 +1,101 @@
-// =========================================
-// PHONE / PASSCODE
-// =========================================
+// ========================================
+// ORIGINAL PHONE / PASSCODE LOGIC
+// ========================================
 
-const lockScreen =
-    document.getElementById("lockScreen");
+const lockScreen = document.getElementById("lockScreen");
+const passcodeScreen = document.getElementById("passcodeScreen");
+const homeScreen = document.getElementById("homeScreen");
 
-const passcodeScreen =
-    document.getElementById("passcodeScreen");
+const messagesScreen = document.getElementById("messagesScreen");
+const chatScreen = document.getElementById("chatScreen");
 
-const homeScreen =
-    document.getElementById("homeScreen");
-
-const messagesScreen =
-    document.getElementById("messagesScreen");
-
-const threadScreen =
-    document.getElementById("threadScreen");
+const numberButtons = document.querySelectorAll(".number");
+const dots = document.querySelectorAll(".dot");
+const deleteButton = document.getElementById("deleteButton");
 
 
-const numberButtons =
-    document.querySelectorAll(".number");
-
-const dots =
-    document.querySelectorAll(".dot");
-
-const deleteButton =
-    document.getElementById("deleteButton");
-
-
+// Adrien's passcode
 const correctPasscode = "280905";
 
 let enteredPasscode = "";
 
 
+// ========================================
+// OPEN PASSCODE SCREEN
+// ========================================
 
-function showScreen(screen) {
+lockScreen.addEventListener("click", function () {
 
-    const screens = [
+    lockScreen.classList.add("hidden");
 
-        lockScreen,
-
-        passcodeScreen,
-
-        homeScreen,
-
-        messagesScreen,
-
-        threadScreen
-
-    ];
-
-
-    screens.forEach(function(item) {
-
-        item.classList.add("hidden");
-
-    });
-
-
-    screen.classList.remove("hidden");
-
-}
-
-
-
-// OPEN PASSCODE
-
-lockScreen.addEventListener(
-    "click",
-
-    function() {
-
-        showScreen(passcodeScreen);
-
-    }
-);
-
-
-
-// NUMBER BUTTONS
-
-numberButtons.forEach(function(button) {
-
-    button.addEventListener(
-        "click",
-
-        function() {
-
-            if (
-                enteredPasscode.length
-                < 6
-            ) {
-
-                enteredPasscode +=
-                    button.dataset.number;
-
-                updateDots();
-
-            }
-
-
-            if (
-                enteredPasscode.length
-                === 6
-            ) {
-
-                checkPasscode();
-
-            }
-
-        }
-    );
+    passcodeScreen.classList.remove("hidden");
 
 });
 
 
+// ========================================
+// NUMBER BUTTONS
+// ========================================
+
+numberButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        if (enteredPasscode.length < 6) {
+
+            enteredPasscode += button.dataset.number;
+
+            updateDots();
+
+        }
+
+        if (enteredPasscode.length === 6) {
+
+            checkPasscode();
+
+        }
+
+    });
+
+});
+
+
+// ========================================
+// UPDATE PASSCODE DOTS
+// ========================================
 
 function updateDots() {
 
-    dots.forEach(
-        function(dot, index) {
+    dots.forEach(function (dot, index) {
 
-            if (
-                index
-                < enteredPasscode.length
-            ) {
+        if (index < enteredPasscode.length) {
 
-                dot.classList.add(
-                    "filled"
-                );
-
-            }
-
-            else {
-
-                dot.classList.remove(
-                    "filled"
-                );
-
-            }
+            dot.classList.add("filled");
 
         }
-    );
+
+        else {
+
+            dot.classList.remove("filled");
+
+        }
+
+    });
 
 }
 
 
+// ========================================
+// CHECK PASSCODE
+// ========================================
 
 function checkPasscode() {
 
-    if (
-        enteredPasscode
-        === correctPasscode
-    ) {
+    if (enteredPasscode === correctPasscode) {
 
-        showScreen(homeScreen);
+        passcodeScreen.classList.add("hidden");
+
+        homeScreen.classList.remove("hidden");
 
     }
 
@@ -164,51 +105,79 @@ function checkPasscode() {
 
         updateDots();
 
-        alert(
-            "Incorrect Passcode"
-        );
+        alert("Incorrect Passcode");
 
     }
 
 }
 
 
+// ========================================
+// DELETE BUTTON
+// ========================================
 
-deleteButton.addEventListener(
-    "click",
+deleteButton.addEventListener("click", function (event) {
 
-    function(event) {
+    event.stopPropagation();
 
-        event.stopPropagation();
+    enteredPasscode =
+        enteredPasscode.slice(0, -1);
 
-        enteredPasscode =
-            enteredPasscode.slice(
-                0,
-                -1
-            );
+    updateDots();
 
-        updateDots();
-
-    }
-);
+});
 
 
 
-// =========================================
+// ========================================
+// MESSAGES
+// ========================================
+
+const messagesApp =
+    document.getElementById("messagesApp");
+
+const messagesBack =
+    document.getElementById("messagesBack");
+
+const chatBack =
+    document.getElementById("chatBack");
+
+const chatMessages =
+    document.getElementById("chatMessages");
+
+const chatName =
+    document.getElementById("chatName");
+
+const chatAvatar =
+    document.getElementById("chatAvatar");
+
+const chatStatus =
+    document.getElementById("chatStatus");
+
+const unknownResponse =
+    document.getElementById("unknownResponse");
+
+const replyUnknown =
+    document.getElementById("replyUnknown");
+
+const messageBadge =
+    document.getElementById("messageBadge");
+
+const unknownPreview =
+    document.getElementById("unknownPreview");
+
+
+let unknownOpened = false;
+let unknownBlocked = false;
+let currentChat = "";
+
+
+
+// ========================================
 // CHAT DATA
-//
-// out = Adrien
-// in = the other person
-//
-// All old chats are read-only.
-// =========================================
+// ========================================
 
 const chats = {
-
-
-    // =====================================
-    // EMMA
-    // =====================================
 
     emma: {
 
@@ -216,501 +185,267 @@ const chats = {
 
         avatar: "E",
 
-        preview:
-            "5 missed calls · 2 video calls",
-
-        time:
-            "Sep 16",
-
-        status:
-            "past conversation · read only",
-
-        items: [
-
-
-            {
-                type: "date",
-                text: "June 24, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text: "Thks little sis🤣",
-                time: "16:49"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "💀",
-                time: "16:49"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Tell your mom to call me",
-                time: "16:50"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Tell her yourself",
-                time: "16:50"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "She's not picking up",
-                time: "16:51"
-            },
-
-
-            {
-                type: "date",
-                text: "June 29, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You took my mom's car?",
-                time: "07:51"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Yea mine is in repair",
-                time: "08:05"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "Again?",
-                time: "08:05"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You are such a bad driver😌💀",
-                time: "08:05"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Blame people on the road",
-                time: "08:10"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Yea of course. Come pick me up then",
-                time: "08:15"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Where and when",
-                time: "08:15"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "At the entrance at 2 pm.",
-                time: "08:20"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "👍",
-                time: "08:20"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Don't be late like last time",
-                time: "08:20"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text: "Yes boss",
-                time: "08:20"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text: "I'm here",
-                time: "13:57"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title: "Voice call",
-                subtitle: "46 sec",
-                time: "16:58"
-            },
-
-
-            {
-                type: "date",
-                text: "August 05, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "When you come home call me",
-                time: "14:35"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "Ok?",
-                time: "14:40"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "15:10"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You told me to call you now you ain't even picking up!🙄",
-                time: "15:15"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title: "Voice call",
-                subtitle: "32 sec",
-                time: "15:30"
-            },
-
-
-            {
-                type: "date",
-                text: "August 19, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Got the tickets",
-                time: "17:04"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Yes!! Thks cousin",
-                time: "17:05"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Don't tell your mom or ill get scolded again for spoiling you",
-                time: "17:05"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "🥱",
-                time: "17:05"
-            },
-
-
-            {
-                type: "date",
-                text: "August 25, 2026"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title: "Video call",
-                subtitle: "1 min24 sec",
-                time: "16:09"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Thks frat boy",
-                time: "17:09"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Frat what?",
-                time: "17:09"
-            },
-
-
-            {
-                type: "date",
-                text: "August 31, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Why does your mom want to see me?",
-                time: "17:15"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "🤣",
-                time: "17:16"
-            },
-
-
-            {
-                type: "date",
-                text: "September 03, 2026"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title: "Voice call",
-                subtitle: "2 min19 sec",
-                time: "09:06"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I'm sitting in it",
-                time: "09:23"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Dont scratch it",
-                time: "09:25"
-            },
-
-
-            {
-                type: "date",
-                text: "September 15, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Where the fuck are you!?!",
-                time: "07:05"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You are worrying my mom",
-                time: "07:24"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "And me 💀",
-                time: "07:25"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I'm in front of your apartment",
-                time: "07:40"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "07:40"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Your car is here. I dont understand",
-                time: "07:45"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I can hear your phone ringing inside",
-                time: "07:50"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "08:00"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "17:29"
-            },
-
-
-            {
-                type: "date",
-                text: "September 16, 2026"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed video call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed video call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "No answer",
-                time: "03:32"
-            }
+        status: "Read only",
+
+        messages: [
+
+            date("June 24, 2026"),
+
+            out("Thks little sis🤣", "16:49"),
+
+            incoming("💀", "16:49"),
+
+            out("Tell your mom to call me", "16:50"),
+
+            incoming("Tell her yourself", "16:50"),
+
+            out("She's not picking up", "16:51"),
+
+
+            date("June 29, 2026"),
+
+            incoming(
+                "You took my mom's car?",
+                "07:51"
+            ),
+
+            out(
+                "Yea mine is in repair",
+                "08:05"
+            ),
+
+            incoming("Again?", "08:05"),
+
+            incoming(
+                "You are such a bad driver😌💀",
+                "08:05"
+            ),
+
+            out(
+                "Blame people on the road",
+                "08:10"
+            ),
+
+            incoming(
+                "Yea of course. Come pick me up then",
+                "08:15"
+            ),
+
+            out(
+                "Where and when",
+                "08:15"
+            ),
+
+            incoming(
+                "At the entrance at 2 pm.",
+                "08:20"
+            ),
+
+            incoming(
+                "Don't be late like last time",
+                "08:20"
+            ),
+
+            out(
+                "Yes boss",
+                "08:20"
+            ),
+
+            out(
+                "I'm here",
+                "13:57"
+            ),
+
+            call(
+                "out",
+                "Voice call",
+                "46 sec",
+                "16:58"
+            ),
+
+
+            date("August 05, 2026"),
+
+            out(
+                "When you come home call me",
+                "14:35"
+            ),
+
+            incoming("Ok?", "14:40"),
+
+            call(
+                "in",
+                "Missed Voice call",
+                "Tap to call back",
+                "15:10"
+            ),
+
+            incoming(
+                "You told me to call you now you ain't even picking up!🙄",
+                "15:15"
+            ),
+
+
+            date("August 19, 2026"),
+
+            out(
+                "Got the tickets",
+                "17:04"
+            ),
+
+            incoming(
+                "Yes!! Thks cousin",
+                "17:05"
+            ),
+
+            out(
+                "Don't tell your mom or ill get scolded again for spoiling you",
+                "17:05"
+            ),
+
+
+            date("August 25, 2026"),
+
+            call(
+                "out",
+                "Video call",
+                "1 min 24 sec",
+                "16:09"
+            ),
+
+            incoming(
+                "Thks frat boy",
+                "17:09"
+            ),
+
+            out(
+                "Frat what?",
+                "17:09"
+            ),
+
+
+            date("September 03, 2026"),
+
+            call(
+                "in",
+                "Voice call",
+                "2 min 19 sec",
+                "09:06"
+            ),
+
+            incoming(
+                "I'm sitting in it",
+                "09:23"
+            ),
+
+            out(
+                "Dont scratch it",
+                "09:25"
+            ),
+
+
+            date("September 15, 2026"),
+
+            incoming(
+                "Where the fuck are you!?!",
+                "07:05"
+            ),
+
+            incoming(
+                "You are worrying my mom",
+                "07:24"
+            ),
+
+            incoming(
+                "And me 💀",
+                "07:25"
+            ),
+
+            incoming(
+                "I'm in front of your apartment",
+                "07:40"
+            ),
+
+            call(
+                "in",
+                "Missed Voice call",
+                "Tap to call back",
+                "07:40"
+            ),
+
+            incoming(
+                "Your car is here. I dont understand",
+                "07:45"
+            ),
+
+            incoming(
+                "I can hear your phone ringing inside",
+                "07:50"
+            ),
+
+            call(
+                "in",
+                "Missed Voice call",
+                "Tap to call back",
+                "08:00"
+            ),
+
+
+            date("September 16, 2026"),
+
+            call(
+                "out",
+                "Missed video call",
+                "No answer",
+                "03:32"
+            ),
+
+            call(
+                "out",
+                "Missed video call",
+                "No answer",
+                "03:32"
+            ),
+
+            call(
+                "out",
+                "Missed Voice call",
+                "No answer",
+                "03:32"
+            ),
+
+            call(
+                "out",
+                "Missed Voice call",
+                "No answer",
+                "03:32"
+            ),
+
+            call(
+                "out",
+                "Missed Voice call",
+                "No answer",
+                "03:32"
+            ),
+
+            call(
+                "out",
+                "Missed Voice call",
+                "No answer",
+                "03:32"
+            ),
+
+            call(
+                "out",
+                "Missed Voice call",
+                "No answer",
+                "03:32"
+            )
 
         ]
 
     },
 
-
-
-    // =====================================
-    // AUNTIE
-    // =====================================
 
     auntie: {
 
@@ -718,351 +453,175 @@ const chats = {
 
         avatar: "A",
 
-        preview:
-            "Adrien where are you?",
+        status: "Read only",
 
-        time:
-            "Sep 15",
+        messages: [
 
-        status:
-            "past conversation · read only",
+            date("July 15, 2026"),
 
-        items: [
+            incoming(
+                "Can you come fetch me? I'm at the red section.",
+                "15:43"
+            ),
 
+            out(
+                "Yea, ill leave the office in 20 mins",
+                "15:44"
+            ),
 
-            {
-                type: "date",
-                text: "July 15, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Can you come fetch me? I'm at the red section.",
-                time: "15:43"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Yea, ill leave the office in 20 mins",
-                time: "15:44"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Thks son",
-                time: "15:44"
-            },
+            incoming(
+                "Thks son",
+                "15:44"
+            ),
 
 
-            {
-                type: "date",
-                text: "August 05, 2026"
-            },
+            date("August 05, 2026"),
 
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Auntie can you lend me your car, mine broke",
-                time: "14:30"
-            },
+            out(
+                "Auntie can you lend me your car, mine broke",
+                "14:30"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Emma took it\nShe'll be back from uni in 30 mins\nAsk her",
-                time: "14:30"
-            },
+            incoming(
+                "Emma took it\nShe'll be back from uni in 30 mins\nAsk her",
+                "14:30"
+            ),
 
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "K thks",
-                time: "14:31"
-            },
+            out(
+                "K thks",
+                "14:31"
+            ),
 
 
-            {
-                type: "date",
-                text: "August 06, 2026"
-            },
+            date("August 06, 2026"),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Don't forget to have dinner. I put it in the fridge",
-                time: "15:50"
-            },
+            incoming(
+                "Don't forget to have dinner. I put it in the fridge",
+                "15:50"
+            ),
 
 
-            {
-                type: "date",
-                text: "August 07, 2026"
-            },
+            date("August 18, 2026"),
 
-            {
-                type: "call",
-                side: "out",
-                title: "Video call",
-                subtitle: "3 sec",
-                time: "15:52"
-            },
+            incoming(
+                "Keys in the pink bag",
+                "10:23"
+            ),
 
-            {
-                type: "call",
-                side: "out",
-                title: "Video call",
-                subtitle: "29 min47 sec",
-                time: "16:22"
-            },
+            out("Thks", "11:00"),
+
+            out("Got it", "11:05"),
 
 
-            {
-                type: "date",
-                text: "August 18, 2026"
-            },
+            date("August 25, 2026"),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Keys in the pink bag",
-                time: "10:23"
-            },
+            out(
+                "I'll dine with colleagues tonight.",
+                "05:27"
+            ),
 
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Thks",
-                time: "11:00"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Got it",
-                time: "11:05"
-            },
+            incoming(
+                "Have a nice time. Don't drink too much",
+                "06:00"
+            ),
 
 
-            {
-                type: "date",
-                text: "August 25, 2026"
-            },
+            date("August 31, 2026"),
 
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "I'll dine with colleagues tonight.",
-                time: "05:27"
-            },
+            incoming(
+                "Come see me now",
+                "16:29"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Have a nice time. Don't drink too much",
-                time: "06:00"
-            },
+            out(
+                "Something happened?",
+                "16:29"
+            ),
 
 
-            {
-                type: "date",
-                text: "August 31, 2026"
-            },
+            date("September 02, 2026"),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Come see me now",
-                time: "16:29"
-            },
+            out(
+                "Auntie my new car will be coming tomorrow. Your address is still on my documents.",
+                "08:32"
+            ),
 
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Something happened?",
-                time: "16:29"
-            },
+            incoming(
+                "Ok what time?",
+                "12:33"
+            ),
 
+            out(
+                "Around 9 am. I'll be at work",
+                "12:33"
+            ),
 
-            {
-                type: "date",
-                text: "September 02, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Auntie my new car will be coming tomorrow. Your address is still on my documents.",
-                time: "08:32"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Ok what time?",
-                time: "12:33"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Around 9 am. I'll be at work",
-                time: "12:33"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Emma will be home see with her",
-                time: "12:33"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text: "👍",
-                time: "12:33"
-            },
+            incoming(
+                "Emma will be home see with her",
+                "12:33"
+            ),
 
 
-            {
-                type: "date",
-                text: "September 14, 2026"
-            },
+            date("September 14, 2026"),
 
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "22:58"
-            },
+            call(
+                "in",
+                "Missed voice call",
+                "Tap to call back",
+                "22:58"
+            ),
 
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "23:01"
-            },
+            call(
+                "in",
+                "Missed voice call",
+                "Tap to call back",
+                "23:01"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Where are you",
-                time: "23:15"
-            },
+            incoming(
+                "Where are you",
+                "23:15"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "It's past 11 pm",
-                time: "23:16"
-            },
+            incoming(
+                "It's past 11 pm",
+                "23:16"
+            ),
 
 
-            {
-                type: "date",
-                text: "September 15, 2026"
-            },
+            date("September 15, 2026"),
 
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "06:00"
-            },
+            call(
+                "in",
+                "Missed voice call",
+                "Tap to call back",
+                "06:00"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Are you back home?",
-                time: "06:10"
-            },
+            incoming(
+                "Are you back home?",
+                "06:10"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I'm getting worried Adrien. Can you please call when you get back?",
-                time: "06:42"
-            },
+            incoming(
+                "I'm getting worried Adrien. Can you please call when you get back?",
+                "06:42"
+            ),
 
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Emma is coming to your place to check up on you",
-                time: "07:05"
-            },
+            incoming(
+                "Emma is coming to your place to check up on you",
+                "07:05"
+            ),
 
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "16:44"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "16:44"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Adrien where are you?",
-                time: "19:44"
-            }
+            incoming(
+                "Adrien where are you?",
+                "19:44"
+            )
 
         ]
 
     },
 
-
-
-    // =====================================
-    // CED
-    // =====================================
 
     ced: {
 
@@ -1070,689 +629,342 @@ const chats = {
 
         avatar: "C",
 
-        preview:
-            "Did they do something to you?",
-
-        time:
-            "Sep 15",
-
-        status:
-            "past conversation · read only",
-
-        items: [
-
-
-            {
-                type: "date",
-                text: "August 18, 2026"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title: "Voice call",
-                subtitle: "43 sec",
-                time: "01:52"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Let's park on the East Wing",
-                time: "01:52"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Red car",
-                time: "01:52"
-            },
-
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "No answer",
-                time: "17:46"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Tell me",
-                time: "17:47"
-            },
-
-
-            {
-                type: "date",
-                text: "August 19, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You got the tickets?",
-                time: "17:00"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Yea thks",
-                time: "17:00"
-            },
-
-
-            {
-                type: "date",
-                text: "August 25, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Excited for tonight?",
-                time: "05:55"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Just some drinks nothing ordinary",
-                time: "05:55"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Don't forget to brink the whisky",
-                time: "06:05"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "What does frat boy mean?",
-                time: "17:56"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Who roasted you🤣🤣",
-                time: "17:56"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Where are you",
-                time: "19:57"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Parking? You?",
-                time: "19:57"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Inside. You'll be surprised who is here tonight",
-                time: "20:00"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Why who?",
-                time: "20:01"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Just come inside",
-                time: "20:01"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title: "Voice call",
-                subtitle: "1 min47 sec",
-                time: "22:33"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Bro you took him with you?",
-                time: "22:33"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Text me when you get home. Or I'll be worried",
-                time: "22:45"
-            },
-
-
-            {
-                type: "date",
-                text: "August 26, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Got wasted. Just woke up",
-                time: "10:02"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Yea I figured.",
-                time: "10:03"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Good thing I got my aunt's car back in one piece. 💀",
-                time: "10:04"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "So what happened after you know who?",
-                time: "18:04"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title: "Video call",
-                subtitle: "15 sec",
-                time: "18:05"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You are sick bro",
-                time: "18:05"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Shhh",
-                time: "18:05"
-            },
-
-
-            {
-                type: "date",
-                text: "August 31, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "My aunt found your pack of cigarettes in the back of her seat. What the fuck is wrong with you bro!? Luckily I brushed it off by telling her it's Steve's. She told me to stop hanging out with them",
-                time: "18:07"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Wait Steve?",
-                time: "18:08"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "The chubby guy?",
-                time: "18:08"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Yea I don't even hang out with them so it's fine",
-                time: "18:08"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "I felt embarrassed and now Emma look at me wierd",
-                time: "18:09"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Really? Playing the devoted big brother?",
-                time: "18:09"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "No? But I don't want her to end up like me",
-                time: "18:09"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Same thing. It's called devotion",
-                time: "18:10"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Your aunt still dont know about....",
-                time: "18:10"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "No they will never know",
-                time: "18:10"
-            },
-
-
-            {
-                type: "date",
-                text: "September 03, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Check out my new car",
-                time: "16:12"
-            },
-
-            {
-                type: "media",
-                side: "out",
-                title: "Pic of car",
-                time: "16:12"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Sick man",
-                time: "18:14"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "What you do with the old one?",
-                time: "18:14"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Sold it for this one?",
-                time: "18:14"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Well...",
-                time: "18:15"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "What did you do man?",
-                time: "18:15"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Nothing just business. My job has been paying well lately",
-                time: "18:16"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "That's a lie",
-                time: "18:16"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Was it him?",
-                time: "18:16"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Oh please. It was one time",
-                time: "18:16"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Yea well when you once fall it's hard to get out",
-                time: "18:16"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Be careful man",
-                time: "18:16"
-            },
-
-
-            {
-                type: "date",
-                text: "September 08, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Bro why are you leaving early again?",
-                time: "16:23"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "The boss is filtering employees",
-                time: "16:24"
-            },
-
-
-            {
-                type: "date",
-                text: "September 14, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Ced if something happened to me. Look after my aunt and Emma",
-                time: "07:27"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "What do you mean?",
-                time: "07:27"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Where are you?",
-                time: "07:27"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Bro where are you?",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You skipped work today",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Why?",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Where are you?",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Something happened?",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Is it M?",
-                time: "18:28"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Bro you are scaring me",
-                time: "18:29"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Did they do something to you?",
-                time: "18:29"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Your aunt just called me. I told her idk where you are and that you have been skipping work. Sorry man but I'm worried about you too",
-                time: "18:30"
-            },
-
-
-            {
-                type: "date",
-                text: "September 15, 2026"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Bro where are you?",
-                time: "08:32"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "18:32"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "18:34"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I'm parked outside your building I'm coming",
-                time: "18:34"
-            },
-
-            {
-                type: "call",
-                side: "in",
-                title:
-                    "Missed Voice call",
-                subtitle:
-                    "Tap to call back",
-                time: "18:36"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Are you inside?",
-                time: "18:36"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I can hear your phone ringing?",
-                time: "18:36"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Your car is outside too",
-                time: "18:38"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Oh your aunt is here now. Your sister too. They just parked",
-                time: "18:39"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "I'm leaving",
-                time: "18:39"
-            }
+        status: "Read only",
+
+        messages: [
+
+            date("August 19, 2026"),
+
+            incoming(
+                "You got the tickets?",
+                "17:00"
+            ),
+
+            out(
+                "Yea thks",
+                "17:00"
+            ),
+
+
+            date("August 25, 2026"),
+
+            incoming(
+                "Excited for tonight?",
+                "05:55"
+            ),
+
+            out(
+                "Just some drinks nothing ordinary",
+                "05:55"
+            ),
+
+            incoming(
+                "Don't forget to brink the whisky",
+                "06:05"
+            ),
+
+            out(
+                "What does frat boy mean?",
+                "17:56"
+            ),
+
+            incoming(
+                "Who roasted you🤣🤣",
+                "17:56"
+            ),
+
+            incoming(
+                "Where are you",
+                "19:57"
+            ),
+
+            out(
+                "Parking? You?",
+                "19:57"
+            ),
+
+            incoming(
+                "Inside. You'll be surprised who is here tonight",
+                "20:00"
+            ),
+
+            out(
+                "Why who?",
+                "20:01"
+            ),
+
+            incoming(
+                "Just come inside",
+                "20:01"
+            ),
+
+            incoming(
+                "Bro you took him with you?",
+                "22:33"
+            ),
+
+            incoming(
+                "Text me when you get home. Or I'll be worried",
+                "22:45"
+            ),
+
+
+            date("August 26, 2026"),
+
+            out(
+                "Got wasted. Just woke up",
+                "10:02"
+            ),
+
+            incoming(
+                "Yea I figured.",
+                "10:03"
+            ),
+
+            out(
+                "Good thing I got my aunt's car back in one piece. 💀",
+                "10:04"
+            ),
+
+            incoming(
+                "So what happened after you know who?",
+                "18:04"
+            ),
+
+            incoming(
+                "You are sick bro",
+                "18:05"
+            ),
+
+            out(
+                "Shhh",
+                "18:05"
+            ),
+
+
+            date("August 31, 2026"),
+
+            out(
+                "My aunt found your pack of cigarettes in the back of her seat. What the fuck is wrong with you bro!? Luckily I brushed it off by telling her it's Steve's. She told me to stop hanging out with them",
+                "18:07"
+            ),
+
+            incoming(
+                "Wait Steve?",
+                "18:08"
+            ),
+
+            incoming(
+                "The chubby guy?",
+                "18:08"
+            ),
+
+            out(
+                "Yea I don't even hang out with them so it's fine",
+                "18:08"
+            ),
+
+            out(
+                "I felt embarrassed and now Emma look at me wierd",
+                "18:09"
+            ),
+
+            incoming(
+                "Really? Playing the devoted big brother?",
+                "18:09"
+            ),
+
+            out(
+                "No? But I don't want her to end up like me",
+                "18:09"
+            ),
+
+            incoming(
+                "Same thing. It's called devotion",
+                "18:10"
+            ),
+
+            incoming(
+                "Your aunt still dont know about....",
+                "18:10"
+            ),
+
+            out(
+                "No they will never know",
+                "18:10"
+            ),
+
+
+            date("September 03, 2026"),
+
+            out(
+                "Check out my new car",
+                "16:12"
+            ),
+
+            incoming(
+                "Sick man",
+                "18:14"
+            ),
+
+            incoming(
+                "What you do with the old one?",
+                "18:14"
+            ),
+
+            out(
+                "Sold it for this one?",
+                "18:14"
+            ),
+
+            incoming(
+                "What did you do man?",
+                "18:15"
+            ),
+
+            out(
+                "Nothing just business. My job has been paying well lately",
+                "18:16"
+            ),
+
+            incoming(
+                "That's a lie",
+                "18:16"
+            ),
+
+            incoming(
+                "Was it him?",
+                "18:16"
+            ),
+
+            out(
+                "Oh please. It was one time",
+                "18:16"
+            ),
+
+            incoming(
+                "Yea well when you once fall it's hard to get out",
+                "18:16"
+            ),
+
+            incoming(
+                "Be careful man",
+                "18:16"
+            ),
+
+
+            date("September 08, 2026"),
+
+            incoming(
+                "Bro why are you leaving early again?",
+                "16:23"
+            ),
+
+            incoming(
+                "The boss is filtering employees",
+                "16:24"
+            ),
+
+
+            date("September 14, 2026"),
+
+            out(
+                "Ced if something happened to me. Look after my aunt and Emma",
+                "07:27"
+            ),
+
+            incoming(
+                "What do you mean?",
+                "07:27"
+            ),
+
+            incoming(
+                "Where are you?",
+                "07:27"
+            ),
+
+            incoming(
+                "Bro where are you?",
+                "18:28"
+            ),
+
+            incoming(
+                "You skipped work today",
+                "18:28"
+            ),
+
+            incoming(
+                "Why?",
+                "18:28"
+            ),
+
+            incoming(
+                "Where are you?",
+                "18:28"
+            ),
+
+            incoming(
+                "Something happened?",
+                "18:28"
+            ),
+
+            incoming(
+                "Is it M?",
+                "18:28"
+            ),
+
+            incoming(
+                "Bro you are scaring me",
+                "18:29"
+            ),
+
+            incoming(
+                "Did they do something to you?",
+                "18:29"
+            ),
+
+
+            date("September 15, 2026"),
+
+            incoming(
+                "Bro where are you?",
+                "08:32"
+            ),
+
+            incoming(
+                "I'm parked outside your building I'm coming",
+                "18:34"
+            ),
+
+            incoming(
+                "Are you inside?",
+                "18:36"
+            ),
+
+            incoming(
+                "I can hear your phone ringing?",
+                "18:36"
+            ),
+
+            incoming(
+                "Your car is outside too",
+                "18:38"
+            ),
+
+            incoming(
+                "Oh your aunt is here now. Your sister too. They just parked",
+                "18:39"
+            ),
+
+            incoming(
+                "I'm leaving",
+                "18:39"
+            )
 
         ]
 
     },
 
-
-
-    // =====================================
-    // TIMMY
-    // =====================================
 
     timmy: {
 
@@ -1760,138 +972,69 @@ const chats = {
 
         avatar: "T",
 
-        preview:
-            "Use the other phone",
+        status: "Encrypted · Read only",
 
-        time:
-            "Aug 25",
+        messages: [
 
-        status:
-            "past conversation · encrypted · read only",
+            system("🔒 Encrypted"),
 
-        items: [
+            date("August 25, 2026"),
 
+            call(
+                "out",
+                "Voice call",
+                "5 sec",
+                "01:44"
+            ),
 
-            {
-                type: "system",
-                text:
-                    "🔒 Encrypted"
-            },
+            out(
+                "I left the money in your bag",
+                "01:46"
+            ),
 
-            {
-                type: "date",
-                text:
-                    "August 25, 2026"
-            },
+            incoming(
+                "👍",
+                "01:46"
+            ),
 
-            {
-                type: "call",
-                side: "out",
-                title:
-                    "Voice call",
-                subtitle:
-                    "5 sec",
-                time:
-                    "01:44"
-            },
+            incoming(
+                "Use the other phone",
+                "01:55"
+            ),
 
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "I left the money in your bag",
-                time:
-                    "01:46"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "👍",
-                time:
-                    "01:46"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "Use the other phone",
-                time:
-                    "01:55"
-            },
-
-            {
-                type: "msg",
-                side: "out",
-                text:
-                    "Oh shit sorry",
-                time:
-                    "01:55"
-            }
+            out(
+                "Oh shit sorry",
+                "01:55"
+            )
 
         ]
 
     },
 
 
-
-    // =====================================
-    // UNKNOWN / M
-    //
-    // THIS IS THE ONLY PRESENT-DAY CHAT
-    // =====================================
-
     unknown: {
 
-        name:
-            "Unknown",
+        name: "Unknown",
 
-        avatar:
-            "?",
+        avatar: "?",
 
-        preview:
-            "You still on for the 25th?",
+        status: "Unknown contact",
 
-        time:
-            "19:15",
+        messages: [
 
-        status:
-            "unknown contact",
+            system("🔒 Unknown"),
 
-        items: [
+            date("Today"),
 
+            incoming(
+                "You are still here?",
+                "19:13"
+            ),
 
-            {
-                type: "system",
-                text:
-                    "🔒 Unknown"
-            },
-
-            {
-                type: "date",
-                text:
-                    "Today"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You are still here?",
-                time:
-                    "19:13"
-            },
-
-            {
-                type: "msg",
-                side: "in",
-                text:
-                    "You still on for the 25th?",
-                time:
-                    "19:15"
-            }
+            incoming(
+                "You still on for the 25th?",
+                "19:15"
+            )
 
         ]
 
@@ -1901,384 +1044,233 @@ const chats = {
 
 
 
-// UNKNOWN FIRST BECAUSE IT IS NEW
+// ========================================
+// MESSAGE HELPERS
+// ========================================
 
-const chatOrder = [
+function date(text) {
 
-    "unknown",
+    return {
+        type: "date",
+        text: text
+    };
 
-    "emma",
+}
 
-    "auntie",
 
-    "ced",
+function system(text) {
 
-    "timmy"
+    return {
+        type: "system",
+        text: text
+    };
 
-];
+}
 
 
+function incoming(text, time) {
 
-// =========================================
-// MESSAGE ELEMENTS
-// =========================================
+    return {
+        type: "message",
+        side: "in",
+        text: text,
+        time: time
+    };
 
-const chatList =
-    document.getElementById(
-        "chatList"
-    );
+}
 
 
-const threadBody =
-    document.getElementById(
-        "threadBody"
-    );
+function out(text, time) {
 
+    return {
+        type: "message",
+        side: "out",
+        text: text,
+        time: time
+    };
 
-const threadName =
-    document.getElementById(
-        "threadName"
-    );
+}
 
 
-const threadStatus =
-    document.getElementById(
-        "threadStatus"
-    );
+function call(side, title, detail, time) {
 
-
-const threadAvatar =
-    document.getElementById(
-        "threadAvatar"
-    );
-
-
-const replyArea =
-    document.getElementById(
-        "replyArea"
-    );
-
-
-const unknownReplyButton =
-    document.getElementById(
-        "unknownReplyButton"
-    );
-
-
-const messageBadge =
-    document.getElementById(
-        "messageBadge"
-    );
-
-
-
-let currentChatId = null;
-
-let unknownOpened = false;
-
-let unknownBlocked = false;
-
-
-
-// =========================================
-// CHAT LIST
-// =========================================
-
-function renderChatList() {
-
-    chatList.innerHTML = "";
-
-
-    chatOrder.forEach(
-        function(id) {
-
-            const chat =
-                chats[id];
-
-
-            const row =
-                document.createElement(
-                    "button"
-                );
-
-
-            row.className =
-                "chat-row";
-
-
-            const isUnread =
-
-                id === "unknown"
-
-                &&
-
-                !unknownOpened;
-
-
-            let preview =
-                chat.preview;
-
-
-            if (
-                id === "unknown"
-
-                &&
-
-                unknownBlocked
-            ) {
-
-                preview =
-                    "Blocked";
-
-            }
-
-
-            row.innerHTML = `
-
-                <div class="avatar">
-                    ${chat.avatar}
-                </div>
-
-                <div class="chat-main">
-
-                    <div class="chat-name">
-
-                        ${chat.name}
-
-                        ${
-                            isUnread
-                            ?
-                            '<span class="unread-dot"></span>'
-                            :
-                            ''
-                        }
-
-                    </div>
-
-                    <div class="chat-preview">
-
-                        ${preview}
-
-                    </div>
-
-                </div>
-
-                <div class="chat-time">
-
-                    ${chat.time}
-
-                </div>
-
-            `;
-
-
-            row.addEventListener(
-                "click",
-
-                function() {
-
-                    openChat(id);
-
-                }
-            );
-
-
-            chatList.appendChild(
-                row
-            );
-
-        }
-    );
-
-
-    if (unknownOpened) {
-
-        messageBadge.classList.add(
-            "hidden"
-        );
-
-    }
-
-    else {
-
-        messageBadge.classList.remove(
-            "hidden"
-        );
-
-    }
+    return {
+        type: "call",
+        side: side,
+        title: title,
+        detail: detail,
+        time: time
+    };
 
 }
 
 
 
-// =========================================
-// OPEN CHAT
-// =========================================
+// ========================================
+// OPEN MESSAGES APP
+// ========================================
 
-function openChat(id) {
+messagesApp.addEventListener("click", function () {
 
-    currentChatId = id;
+    homeScreen.classList.add("hidden");
+
+    messagesScreen.classList.remove("hidden");
+
+});
 
 
-    const chat =
-        chats[id];
+
+// ========================================
+// BACK TO HOME
+// ========================================
+
+messagesBack.addEventListener("click", function () {
+
+    messagesScreen.classList.add("hidden");
+
+    homeScreen.classList.remove("hidden");
+
+});
+
+
+
+// ========================================
+// OPEN EACH CHAT
+// ========================================
+
+document
+    .querySelectorAll(".conversation")
+    .forEach(function (conversation) {
+
+        conversation.addEventListener(
+            "click",
+            function () {
+
+                const chatId =
+                    conversation.dataset.chat;
+
+                openChat(chatId);
+
+            }
+        );
+
+    });
+
+
+
+function openChat(chatId) {
+
+    currentChat = chatId;
+
+    const chat = chats[chatId];
+
+
+    chatName.textContent =
+        chat.name;
+
+    chatAvatar.textContent =
+        chat.avatar;
+
+    chatStatus.textContent =
+        chat.status;
+
+
+    renderMessages(chat.messages);
+
+
+    messagesScreen.classList.add("hidden");
+
+    chatScreen.classList.remove("hidden");
 
 
     if (
-        id === "unknown"
+        chatId === "unknown"
+        &&
+        !unknownBlocked
     ) {
 
         unknownOpened = true;
 
-    }
+        messageBadge.classList.add("hidden");
 
+        document
+            .querySelector('[data-chat="unknown"]')
+            .classList.remove("unread");
 
-    threadName.textContent =
-        chat.name;
+        unknownResponse.classList.remove("hidden");
 
-
-    threadAvatar.textContent =
-        chat.avatar;
-
-
-    if (
-        id === "unknown"
-
-        &&
-
-        unknownBlocked
-    ) {
-
-        threadStatus.textContent =
-            "blocked";
+        chatMessages.classList.add("with-reply");
 
     }
 
     else {
 
-        threadStatus.textContent =
-            chat.status;
+        unknownResponse.classList.add("hidden");
+
+        chatMessages.classList.remove("with-reply");
 
     }
 
 
-    renderThread(chat);
+    setTimeout(function () {
 
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
 
-    // Only Unknown can be answered
-
-    if (
-        id === "unknown"
-
-        &&
-
-        !unknownBlocked
-    ) {
-
-        replyArea.classList.remove(
-            "hidden"
-        );
-
-        threadBody.classList.add(
-            "has-reply"
-        );
-
-    }
-
-    else {
-
-        replyArea.classList.add(
-            "hidden"
-        );
-
-        threadBody.classList.remove(
-            "has-reply"
-        );
-
-    }
-
-
-    renderChatList();
-
-
-    showScreen(
-        threadScreen
-    );
-
-
-    setTimeout(
-        function() {
-
-            threadBody.scrollTop =
-                threadBody.scrollHeight;
-
-        },
-
-        20
-    );
+    }, 30);
 
 }
 
 
 
-// =========================================
-// RENDER CONVERSATION
-// =========================================
+// ========================================
+// BACK TO MESSAGE LIST
+// ========================================
 
-function renderThread(chat) {
+chatBack.addEventListener("click", function () {
 
-    threadBody.innerHTML = "";
+    chatScreen.classList.add("hidden");
 
+    messagesScreen.classList.remove("hidden");
 
-    chat.items.forEach(
-        function(item) {
-
-            threadBody.appendChild(
-                renderItem(item)
-            );
-
-        }
-    );
+});
 
 
-    // If the player already got blocked,
-    // keep showing it if they reopen the chat.
+
+// ========================================
+// RENDER MESSAGES
+// ========================================
+
+function renderMessages(messages) {
+
+    chatMessages.innerHTML = "";
+
+
+    messages.forEach(function (item) {
+
+        chatMessages.appendChild(
+            createMessageElement(item)
+        );
+
+    });
+
 
     if (
-        chat === chats.unknown
-
+        currentChat === "unknown"
         &&
-
         unknownBlocked
     ) {
 
-        threadBody.appendChild(
-
-            renderItem({
-
-                type: "msg",
-
-                side: "out",
-
-                text: "Who is this?",
-
-                time: "19:15"
-
-            })
-
+        chatMessages.appendChild(
+            createMessageElement(
+                out("Who is this?", "19:15")
+            )
         );
 
-
-        threadBody.appendChild(
-
-            renderItem({
-
-                type: "system",
-
-                text: "Blocked"
-
-            })
-
+        chatMessages.appendChild(
+            createMessageElement(
+                system("Blocked")
+            )
         );
 
     }
@@ -2287,32 +1279,21 @@ function renderThread(chat) {
 
 
 
-// =========================================
-// CREATE CHAT ELEMENT
-// =========================================
-
-function renderItem(item) {
+function createMessageElement(item) {
 
 
     // DATE
 
-    if (
-        item.type === "date"
-    ) {
+    if (item.type === "date") {
 
         const element =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         element.className =
             "date-chip";
 
-
         element.textContent =
             item.text;
-
 
         return element;
 
@@ -2320,25 +1301,18 @@ function renderItem(item) {
 
 
 
-    // SYSTEM MESSAGE
+    // SYSTEM
 
-    if (
-        item.type === "system"
-    ) {
+    if (item.type === "system") {
 
         const element =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         element.className =
             "system-chip";
 
-
         element.textContent =
             item.text;
-
 
         return element;
 
@@ -2346,20 +1320,13 @@ function renderItem(item) {
 
 
 
-    // NORMAL MESSAGE ROW
-
     const row =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     row.className =
-
         "message-row "
-
         +
-
         (
             item.side === "out"
             ?
@@ -2370,43 +1337,22 @@ function renderItem(item) {
 
 
     const bubble =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     bubble.className =
-        "message-bubble";
-
+        "message";
 
 
     // CALL
 
-    if (
-        item.type === "call"
-    ) {
-
-        const icon =
-
-            item.title
-                .toLowerCase()
-                .includes("video")
-
-            ?
-
-            "▣"
-
-            :
-
-            "☎";
-
+    if (item.type === "call") {
 
         bubble.innerHTML = `
 
-            <div class="call-card">
+            <div class="call-box">
 
-                <div class="call-icon">
-                    ${icon}
+                <div class="call-symbol">
+                    ☎
                 </div>
 
                 <div>
@@ -2415,15 +1361,15 @@ function renderItem(item) {
                         ${item.title}
                     </div>
 
-                    <div class="call-subtitle">
-                        ${item.subtitle}
+                    <div class="call-detail">
+                        ${item.detail}
                     </div>
 
                 </div>
 
             </div>
 
-            <div class="message-meta">
+            <div class="message-time">
                 ${item.time}
             </div>
 
@@ -2432,86 +1378,38 @@ function renderItem(item) {
     }
 
 
-
-    // MEDIA / PHOTO
-
-    else if (
-        item.type === "media"
-    ) {
-
-        bubble.innerHTML = `
-
-            <div class="media-card">
-
-                <div class="media-icon">
-                    📷
-                </div>
-
-                <div class="call-title">
-                    ${item.title}
-                </div>
-
-            </div>
-
-            <div class="message-meta">
-                ${item.time}
-            </div>
-
-        `;
-
-    }
-
-
-
-    // TEXT
+    // NORMAL TEXT
 
     else {
 
-        const messageText =
-            document.createElement(
-                "div"
-            );
+        const text =
+            document.createElement("div");
 
-
-        messageText.className =
+        text.className =
             "message-text";
 
-
-        messageText.textContent =
+        text.textContent =
             item.text;
 
 
+        const time =
+            document.createElement("div");
 
-        const meta =
-            document.createElement(
-                "div"
-            );
+        time.className =
+            "message-time";
 
-
-        meta.className =
-            "message-meta";
-
-
-        meta.textContent =
-            item.time || "";
+        time.textContent =
+            item.time;
 
 
-        bubble.appendChild(
-            messageText
-        );
+        bubble.appendChild(text);
 
-
-        bubble.appendChild(
-            meta
-        );
+        bubble.appendChild(time);
 
     }
 
 
-    row.appendChild(
-        bubble
-    );
-
+    row.appendChild(bubble);
 
     return row;
 
@@ -2519,196 +1417,76 @@ function renderItem(item) {
 
 
 
-// =========================================
-// UNKNOWN NUMBER INTERACTION
-// =========================================
+// ========================================
+// UNKNOWN PRESENT-DAY RESPONSE
+// ========================================
 
-unknownReplyButton.addEventListener(
+replyUnknown.addEventListener("click", function () {
 
-    "click",
-
-    function() {
-
-
-        if (
-            currentChatId
-            !== "unknown"
-        ) {
-
-            return;
-
-        }
-
-
-        if (
-            unknownBlocked
-        ) {
-
-            return;
-
-        }
-
-
-        unknownReplyButton.disabled =
-            true;
-
-
-
-        // Emma asks who it is
-
-        threadBody.appendChild(
-
-            renderItem({
-
-                type:
-                    "msg",
-
-                side:
-                    "out",
-
-                text:
-                    "Who is this?",
-
-                time:
-                    "19:15"
-
-            })
-
-        );
-
-
-        threadBody.scrollTop =
-            threadBody.scrollHeight;
-
-
-
-        // Small delay before getting blocked
-
-        setTimeout(
-
-            function() {
-
-
-                unknownBlocked = true;
-
-
-                threadBody.appendChild(
-
-                    renderItem({
-
-                        type:
-                            "system",
-
-                        text:
-                            "Blocked"
-
-                    })
-
-                );
-
-
-                threadStatus.textContent =
-                    "blocked";
-
-
-                replyArea.classList.add(
-                    "hidden"
-                );
-
-
-                threadBody.classList.remove(
-                    "has-reply"
-                );
-
-
-                renderChatList();
-
-
-                threadBody.scrollTop =
-                    threadBody.scrollHeight;
-
-
-            },
-
-            700
-
-        );
-
+    if (unknownBlocked) {
+        return;
     }
 
-);
 
+    chatMessages.appendChild(
 
+        createMessageElement(
 
-// =========================================
-// NAVIGATION
-// =========================================
+            out(
+                "Who is this?",
+                "19:15"
+            )
 
-document
-    .getElementById(
-        "openMessagesButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        function() {
-
-            renderChatList();
-
-            showScreen(
-                messagesScreen
-            );
-
-        }
+        )
 
     );
 
 
-
-document
-    .getElementById(
-        "messagesBackButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        function() {
-
-            showScreen(
-                homeScreen
-            );
-
-        }
-
-    );
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
 
 
-
-document
-    .getElementById(
-        "threadBackButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        function() {
-
-            renderChatList();
-
-            showScreen(
-                messagesScreen
-            );
-
-        }
-
-    );
+    replyUnknown.disabled = true;
 
 
+    setTimeout(function () {
 
-// LOAD CHAT LIST
+        unknownBlocked = true;
 
-renderChatList();
+
+        chatMessages.appendChild(
+
+            createMessageElement(
+
+                system("Blocked")
+
+            )
+
+        );
+
+
+        chatStatus.textContent =
+            "Blocked";
+
+
+        unknownPreview.textContent =
+            "Blocked";
+
+
+        unknownResponse.classList.add(
+            "hidden"
+        );
+
+
+        chatMessages.classList.remove(
+            "with-reply"
+        );
+
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+
+
+    }, 700);
+
 });
