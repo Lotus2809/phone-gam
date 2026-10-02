@@ -110,53 +110,75 @@
     </div>
 
     <!-- PUT THE APPS HERE -->
-    <div class="apps">
+    <div class="home-pages-wrapper">
 
-        <button class="app" id="messagesApp">
-            <div class="app-icon messages-icon">💬</div>
-            <span class="badge" id="messageBadge">1</span>
-            <p>Messages</p>
-        </button>
+    <div class="home-pages" id="homePages">
 
-        <button class="app">
-            <div class="app-icon calls-icon">📞</div>
-            <p>Calls</p>
-        </button>
+        <!-- PAGE 1 -->
+        <div class="home-page">
 
-        <button class="app">
-            <div class="app-icon gallery-icon">🖼️</div>
-            <p>Gallery</p>
-        </button>
+            <button class="app" id="messagesApp">
+                <div class="app-icon messages-icon">💬</div>
+                <span class="badge" id="messageBadge">1</span>
+                <p>Messages</p>
+            </button>
 
-        <button class="app">
-            <div class="app-icon browser-icon">🌐</div>
-            <p>Browser</p>
-        </button>
+            <button class="app">
+                <div class="app-icon calls-icon">📞</div>
+                <p>Calls</p>
+            </button>
 
-        <button class="app">
-            <div class="app-icon notes-icon">📝</div>
-            <p>Notes</p>
-        </button>
+            <button class="app">
+                <div class="app-icon gallery-icon">🖼️</div>
+                <p>Gallery</p>
+            </button>
 
-        <button class="app">
-            <div class="app-icon files-icon">📁</div>
-            <p>Files</p>
-        </button>
+            <button class="app">
+                <div class="app-icon browser-icon">🌐</div>
+                <p>Browser</p>
+            </button>
 
-        <button class="app">
-            <div class="app-icon mail-icon">✉️</div>
-            <p>Mail</p>
-        </button>
+        </div>
 
-        <button class="app">
-            <div class="app-icon settings-icon">⚙️</div>
-            <p>Settings</p>
-        </button>
+
+        <!-- PAGE 2 -->
+        <div class="home-page">
+
+            <button class="app">
+                <div class="app-icon notes-icon">📝</div>
+                <p>Notes</p>
+            </button>
+
+            <button class="app">
+                <div class="app-icon files-icon">📁</div>
+                <p>Files</p>
+            </button>
+
+            <button class="app">
+                <div class="app-icon mail-icon">✉️</div>
+                <p>Mail</p>
+            </button>
+
+            <button class="app">
+                <div class="app-icon settings-icon">⚙️</div>
+                <p>Settings</p>
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+
+<!-- PAGE DOTS -->
+<div class="page-dots">
+
+    <span class="page-dot active" data-page="0"></span>
+
+    <span class="page-dot" data-page="1"></span>
+
+</div>
 
     <!-- MESSAGES LIST -->
     <div class="screen messages-screen hidden" id="messagesScreen">
