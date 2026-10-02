@@ -878,3 +878,205 @@ body {
 
     font-weight: bold;
 }
+
+/* =========================================
+   HOME SCREEN PAGES - FIX
+========================================= */
+
+.home-screen {
+    overflow: hidden;
+}
+
+
+/* Horizontal scrolling area */
+
+.home-pages-wrapper {
+    width: 100%;
+    height: calc(100% - 40px);
+
+    display: flex;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Hide scrollbar */
+
+.home-pages-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.home-pages-wrapper {
+    scrollbar-width: none;
+}
+
+
+/* Each page takes the entire phone width */
+
+.home-page {
+    flex: 0 0 100%;
+
+    width: 100%;
+
+    scroll-snap-align: start;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    align-content: start;
+
+    gap: 28px 12px;
+
+    padding: 55px 20px;
+}
+
+
+/* Individual apps */
+
+.app {
+    position: relative;
+
+    width: 75px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-self: center;
+
+    padding: 0;
+
+    cursor: pointer;
+}
+
+
+.app-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+
+    font-size: 29px;
+}
+
+
+.app p {
+    margin: 6px 0 0;
+
+    color: white;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* App colours */
+
+.messages-icon {
+    background: #25a86b;
+}
+
+.calls-icon {
+    background: #34c76f;
+}
+
+.gallery-icon {
+    background: #eeeeee;
+}
+
+.browser-icon {
+    background: #3485f5;
+}
+
+.notes-icon {
+    background: #f2c33d;
+}
+
+.files-icon {
+    background: #4285dc;
+}
+
+.mail-icon {
+    background: #568be8;
+}
+
+.settings-icon {
+    background: #696969;
+}
+
+
+/* Notification */
+
+.badge {
+    position: absolute;
+
+    top: -7px;
+    right: 3px;
+
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: red;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* Two page indicators */
+
+.page-dots {
+    position: absolute;
+
+    bottom: 28px;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 7px;
+}
+
+
+.page-dots span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.65);
+}
