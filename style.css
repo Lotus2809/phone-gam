@@ -1192,3 +1192,30 @@ body {
   text-align: center;
 }
 
+/* ========================================
+   LOCKED GALLERY PHOTO
+======================================== */
+
+.gallery-thumbnail.locked-photo {
+  position: relative;
+}
+
+.gallery-thumbnail.locked-photo img {
+  filter: blur(12px) brightness(0.25);
+}
+
+.gallery-thumbnail.locked-photo::after {
+  content: "🔒";
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 32px;
+  background: rgba(0, 0, 0, 0.25);
+
+  pointer-events: none;
+}
+
