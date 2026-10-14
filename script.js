@@ -1547,13 +1547,25 @@ const galleryCount =
 
 /* PHOTO DATA */
 
+
 const galleryPhotos = [
   {
-    src: "images/pic1.jpg",
-    title: "Wallpaper",
+    src: "pic1.jpg.png",
+    title: "Photo 1",
+    date: ""
+  },
+  {
+    src: "pic2.jpg.png",
+    title: "Photo 2",
+    date: ""
+  },
+  {
+    src: "pic3.jpg.png",
+    title: "Photo 3",
     date: ""
   }
 ];
+
 
 
 /* OPEN GALLERY */
@@ -1649,18 +1661,7 @@ let thirdPhotoUnlocked = false;
 
 // Add two more photos to the existing gallery.
 // Replace the image paths later with real photos.
-galleryPhotos.push(
-  {
-    src: "images/pic2.jpg",
-    title: "Photo 2",
-    date: ""
-  },
-  {
-    src: "images/pic3.jpg",
-    title: "Photo 3",
-    date: ""
-  }
-);
+
 
 // Extend the existing Gallery loading function.
 const originalLoadGallery = loadGallery;
