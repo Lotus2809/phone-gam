@@ -1509,5 +1509,131 @@ if (messagesAppButton && existingMessagesScreen) {
         }
     };
 }
+
+/* ========================================
+   GALLERY APP
+======================================== */
+
+const galleryAppButton =
+  document.querySelector(".gallery-icon").closest(".app");
+
+const galleryScreen =
+  document.getElementById("galleryScreen");
+
+const galleryBack =
+  document.getElementById("galleryBack");
+
+const galleryGrid =
+  document.getElementById("galleryGrid");
+
+const galleryViewer =
+  document.getElementById("galleryViewer");
+
+const galleryPhotoBack =
+  document.getElementById("galleryPhotoBack");
+
+const galleryFullImage =
+  document.getElementById("galleryFullImage");
+
+const galleryPhotoTitle =
+  document.getElementById("galleryPhotoTitle");
+
+const galleryPhotoDate =
+  document.getElementById("galleryPhotoDate");
+
+const galleryCount =
+  document.getElementById("galleryCount");
+
+
+/* PHOTO DATA */
+
+const galleryPhotos = [
+  {
+    src: "images/wallpaper.jpg",
+    title: "Wallpaper",
+    date: ""
+  }
+];
+
+
+/* OPEN GALLERY */
+
+galleryAppButton.addEventListener("click", function () {
+
+  homeScreen.classList.add("hidden");
+  galleryViewer.classList.add("hidden");
+  galleryScreen.classList.remove("hidden");
+
+  loadGallery();
+
+});
+
+
+/* RETURN TO HOME SCREEN */
+
+galleryBack.addEventListener("click", function () {
+
+  galleryScreen.classList.add("hidden");
+  galleryViewer.classList.add("hidden");
+  homeScreen.classList.remove("hidden");
+
+});
+
+
+/* DISPLAY PHOTOS */
+
+function loadGallery() {
+
+  galleryGrid.innerHTML = "";
+
+  galleryCount.textContent =
+    galleryPhotos.length + " Photos";
+
+  galleryPhotos.forEach(function (photo) {
+
+    const button = document.createElement("button");
+    button.className = "gallery-thumbnail";
+    button.type = "button";
+
+    const image = document.createElement("img");
+    image.src = photo.src;
+    image.alt = photo.title;
+    image.loading = "lazy";
+
+    button.appendChild(image);
+
+    button.addEventListener("click", function () {
+      openGalleryPhoto(photo);
+    });
+
+    galleryGrid.appendChild(button);
+
+  });
+
+}
+
+
+/* OPEN SELECTED PHOTO */
+
+function openGalleryPhoto(photo) {
+
+  galleryFullImage.src = photo.src;
+  galleryFullImage.alt = photo.title;
+
+  galleryPhotoTitle.textContent = photo.title;
+  galleryPhotoDate.textContent = photo.date;
+
+  galleryViewer.classList.remove("hidden");
+
+}
+
+
+/* RETURN TO PHOTO GRID */
+
+galleryPhotoBack.addEventListener("click", function () {
+
+  galleryViewer.classList.add("hidden");
+
+});
   
 
