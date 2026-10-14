@@ -63,7 +63,7 @@ body {
             rgba(255,255,255,0.1),
             rgba(255,255,255,0.1)
         ),
-        url("images/wallpaper.jpg");
+        url("images/wallpaper.jpg.png");
 
     background-size: cover;
     background-position: center;
