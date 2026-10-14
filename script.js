@@ -1550,17 +1550,17 @@ const galleryCount =
 
 const galleryPhotos = [
   {
-    src: "pic1.jpg.png",
+    src: "images/pic1.jpg.png",
     title: "Photo 1",
     date: ""
   },
   {
-    src: "pic2.jpg.png",
+    src: "images/pic2.jpg.png",
     title: "Photo 2",
     date: ""
   },
   {
-    src: "pic3.jpg.png",
+    src: "images/pic3.jpg.png",
     title: "Photo 3",
     date: ""
   }
