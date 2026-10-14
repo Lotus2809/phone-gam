@@ -1549,7 +1549,7 @@ const galleryCount =
 
 const galleryPhotos = [
   {
-    src: "images/wallpaper.jpg",
+    src: "images/pic1.jpg",
     title: "Wallpaper",
     date: ""
   }
