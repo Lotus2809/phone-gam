@@ -1651,12 +1651,12 @@ let thirdPhotoUnlocked = false;
 // Replace the image paths later with real photos.
 galleryPhotos.push(
   {
-    src: "images/wallpaper.jpg",
+    src: "images/pic2.jpg",
     title: "Photo 2",
     date: ""
   },
   {
-    src: "images/wallpaper.jpg",
+    src: "images/pic3.jpg",
     title: "Photo 3",
     date: ""
   }
