@@ -1635,5 +1635,90 @@ galleryPhotoBack.addEventListener("click", function () {
   galleryViewer.classList.add("hidden");
 
 });
-  
+
+/* ========================================
+   GALLERY - LOCKED THIRD PHOTO
+   ADDITIONAL CODE ONLY
+======================================== */
+
+// Temporary sample password.
+// Change this later when we design the riddle.
+const thirdPhotoPassword = "SOLE";
+
+let thirdPhotoUnlocked = false;
+
+// Add two more photos to the existing gallery.
+// Replace the image paths later with real photos.
+galleryPhotos.push(
+  {
+    src: "images/wallpaper.jpg",
+    title: "Photo 2",
+    date: ""
+  },
+  {
+    src: "images/wallpaper.jpg",
+    title: "Photo 3",
+    date: ""
+  }
+);
+
+// Extend the existing Gallery loading function.
+const originalLoadGallery = loadGallery;
+
+loadGallery = function () {
+  originalLoadGallery();
+
+  const thumbnails =
+    galleryGrid.querySelectorAll(".gallery-thumbnail");
+
+  const thirdThumbnail = thumbnails[2];
+
+  if (thirdThumbnail && !thirdPhotoUnlocked) {
+    thirdThumbnail.classList.add("locked-photo");
+  }
+};
+
+// Intercept clicks on photo 3 before it opens.
+galleryGrid.addEventListener("click", function (event) {
+
+  const thumbnail = event.target.closest(
+    ".gallery-thumbnail"
+  );
+
+  if (!thumbnail) return;
+
+  const thumbnails = Array.from(
+    galleryGrid.querySelectorAll(".gallery-thumbnail")
+  );
+
+  if (thumbnails.indexOf(thumbnail) !== 2) return;
+
+  if (thirdPhotoUnlocked) return;
+
+  event.stopPropagation();
+
+  const answer = prompt(
+    "This photograph is locked.\nEnter password:"
+  );
+
+  if (answer === null) return;
+
+  if (
+    answer.trim().toUpperCase() ===
+    thirdPhotoPassword
+  ) {
+    thirdPhotoUnlocked = true;
+
+    thumbnail.classList.remove("locked-photo");
+
+    alert("Photograph unlocked!");
+
+    openGalleryPhoto(galleryPhotos[2]);
+
+  } else {
+    alert("Incorrect password.");
+  }
+
+}, true);
+
 
